@@ -7,10 +7,8 @@
             <div class="col-lg-6">
               <div class="card-body p-md-5 mx-md-4">
 
-                <div class="text-center">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                       style="width: 185px;" alt="logo">
-                  <h4 class="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
+                <div class="text-center mb-5 pb-1">
+                  <img src="/assets/app_logo.jpg" style="width: 185px;" alt="logo">
                 </div>
 
                 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -37,29 +35,30 @@
 
                   <div class="text-center pt-1 mb-5 pb-1">
                     <%= f.submit 'Log in', class: 'btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 w-100' %>
-                    <%= render "users/shared/links" %>
+
+                    <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+                      <%= link_to 'Forgot your password?', new_password_path(resource_name), class: 'text-muted' %><br/>
+                    <% end %>
                   </div>
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
                     <p class="mb-0 me-2">Don't have an account?</p>
-                    <button type="button" class="btn btn-outline-danger">Create new</button>
+                    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+                      <%= link_to 'Create New', new_registration_path(resource_name), class: 'btn btn-outline-danger' %>
+                      <br/>
+                    <% end %>
                   </div>
-
                 <% end %>
-
               </div>
             </div>
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4">We are more than just a company</h4>
-                <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-              </div>
+              <img src="https://pngimg.com/uploads/lion_king/lion_king_PNG17.png"
+                   alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </section>
