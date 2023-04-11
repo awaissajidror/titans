@@ -213,3 +213,9 @@ document.addEventListener("DOMContentLoaded", function () {
         defaultDate: defaultDate
     });
 });
+
+$(document).ready(function(){
+    $('.close-flash-icon').click(function(){
+        $('.alert-dismissible').toggle();
+    });
+});

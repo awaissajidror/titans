@@ -1,0 +1,2 @@
+class CashUp < ApplicationRecord
+end

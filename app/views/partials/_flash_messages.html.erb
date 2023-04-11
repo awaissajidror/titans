@@ -1,0 +1,10 @@
+<% flash.each do |_name, msg| %>
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="alert alert-<%= flash[:notice] ? 'success' : 'danger' %> alert-dismissible fade show text-center" role="alert">
+        <%= msg %>
+        <i class="align-middle me-2 close-flash-icon" data-feather="x"></i>
+      </div>
+    </div>
+  </div>
+<% end %>

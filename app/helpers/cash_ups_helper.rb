@@ -1,0 +1,2 @@
+module CashUpsHelper
+end

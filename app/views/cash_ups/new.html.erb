@@ -1,0 +1,11 @@
+<div class="d-flex justify-content-between col-6">
+  <div>
+    <h1>New Cash Up</h1>
+  </div>
+
+  <div class="my-auto">
+    <span><b>Date:</b> <%= Time.zone.now.strftime('%m-%d-%Y') %></span>
+  </div>
+</div>
+
+<%= render 'form', cash_up: @cash_up %>

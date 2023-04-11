@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cash:</strong>
+  <%= @cash_up.cash %>
+</p>
+
+<p>
+  <strong>Card:</strong>
+  <%= @cash_up.card %>
+</p>
+
+<p>
+  <strong>Eft:</strong>
+  <%= @cash_up.eft %>
+</p>
+
+<p>
+  <strong>Sub:</strong>
+  <%= @cash_up.sub %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @cash_up.total %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @cash_up.note %>
+</p>
+
+<%= link_to 'Edit', edit_cash_up_path(@cash_up) %> |
+<%= link_to 'Back', cash_ups_path %>

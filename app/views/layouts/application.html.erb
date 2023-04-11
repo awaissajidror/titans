@@ -14,7 +14,6 @@
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="shortcut icon" href="<%= '/assets/icon-48x48.png' %>"/>
-  <link rel="canonical" href="https://demo-basic.adminkit.io/"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -22,6 +21,27 @@
 </head>
 
 <body>
-<%= yield %>
+<% if user_signed_in? %>
+  <div class="wrapper">
+
+    <%= render partial: 'partials/sidebar' %>
+
+    <div class="main">
+      <%= render partial: 'partials/navbar' %>
+
+      <main class="content">
+        <div class="container-fluid p-0">
+
+          <%= render partial: 'partials/flash_messages' %>
+          <%= yield %>
+        </div>
+      </main>
+
+    </div>
+  </div>
+<% else %>
+  <%= render partial: 'partials/flash_messages' %>
+  <%= yield %>
+<% end %>
 </body>
 </html>
