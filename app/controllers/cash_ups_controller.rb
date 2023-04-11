@@ -18,12 +18,13 @@ class CashUpsController < ApplicationController
   def create
     @cash_up = CashUp.new(cash_up_params)
     @cash_up.save
-    flash[:success] = 'Post created successfully!'
+    flash[:success] = 'CashUp Added Successfully!'
     redirect_to cash_ups_url
   end
 
   def update
     @cash_up.update(cash_up_params)
+    flash[:success] = 'CashUp Updated Successfully!'
     redirect_to cash_ups_url
   end
 

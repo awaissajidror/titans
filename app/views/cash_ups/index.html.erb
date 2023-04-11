@@ -34,16 +34,37 @@
       <td><%= cash_up.created_at.strftime('%m-%d-%Y') %></td>
       <td>
         <%= link_to edit_cash_up_path(cash_up), class: 'no-text-deco' do %>
-          <i class="align-middle me-2" data-feather="edit"></i>
+          <i class="align-middle me-2 text-secondary" data-feather="edit"></i>
         <% end %>
 
         <span class="mx-3">|</span>
 
-        <%= link_to cash_up, method: :delete do %>
-          <i class="align-middle me-2" data-feather="trash-2"></i>
-        <% end %>
+        <i class="align-middle me-2 delete-cash-up text-danger cursor-pointer"
+           data-bs-toggle="modal"
+           data-bs-target="#exampleModal-<%= cash_up.id %>"
+           data-feather="trash-2">
+        </i>
+
       </td>
     </tr>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal-<%= cash_up.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <%= link_to 'Delete', cash_up, method: :delete, class: 'btn btn-danger' %>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
   </tbody>
 </table>
@@ -51,3 +72,7 @@
 <div class="digg_pagination">
   <%= will_paginate @cash_ups, :container => false %>
 </div>
+
+
+
+
