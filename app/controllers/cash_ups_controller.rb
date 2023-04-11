@@ -2,7 +2,7 @@ class CashUpsController < ApplicationController
   before_action :set_cash_up, only: %i[ show edit update destroy ]
 
   def index
-    @cash_ups = CashUp.all
+    @cash_ups = CashUp.paginate(page: params[:page], per_page: 15).order('id DESC')
   end
 
   def show
