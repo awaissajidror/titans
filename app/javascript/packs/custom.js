@@ -214,8 +214,44 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-$(document).ready(function(){
-    $('.close-flash-icon').click(function(){
+$(document).ready(function () {
+    $('.close-flash-icon').click(function () {
         $('.alert-dismissible').toggle();
     });
+});
+
+$(document).ready(function () {
+    $('#total-cash, #total-card, #total-eft, #total-refund').on('keyup', function () {
+        $('#calculation-fields').addClass('hide');
+        $('#create-cash-up-btn').prop('disabled', true);
+    });
+
+    $('#show-calculations').click(function () {
+        // Getting Values
+
+        const totalCash   = $('#total-cash').val();
+        const totalCard   = $('#total-card').val();
+        const totalEft    = $('#total-eft').val();
+        const totalRefund = $('#total-refund').val();
+
+        // Calculations
+        let cash = (isNaN(totalCash) || totalCash === '' || totalCash === null) ? parseFloat('0.00') : parseFloat(totalCash)
+        let card = (isNaN(totalCard) || totalCard === '' || totalCard === null) ? parseFloat('0.00') : parseFloat(totalCard)
+        let eft  = (isNaN(totalEft) || totalEft === '' || totalEft === null) ? parseFloat('0.00') : parseFloat(totalEft)
+
+        debugger;
+        const sum = cash + card + eft
+        const subTotal = `${sum} - ${totalRefund}`;
+        const Total = sum - totalRefund;
+
+        debugger;
+        // Populate fields
+        $('#cash_up_sub').attr('value', subTotal);
+        $('#cash_up_total').attr('value', Total);
+
+        // Show/Hide functionality
+        $('#calculation-fields').removeClass('hide');
+        $('#create-cash-up-btn').prop('disabled', false)
+    });
+
 });

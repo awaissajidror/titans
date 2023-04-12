@@ -14,27 +14,34 @@
 
     <div class="mb-3">
       <%= form.label :cash, 'CASH' %>
-      <%= form.number_field :cash, step: :any, class: 'form-control' %>
+      <%= form.number_field :cash, step: :any, class: 'form-control', id: 'total-cash' %>
     </div>
 
     <div class="mb-3">
       <%= form.label :card, 'CARD' %>
-      <%= form.number_field :card, step: :any, class: 'form-control' %>
+      <%= form.number_field :card, step: :any, class: 'form-control', id: 'total-card' %>
     </div>
 
     <div class="mb-3">
       <%= form.label :eft, 'EFT' %>
-      <%= form.number_field :eft, step: :any, class: 'form-control' %>
+      <%= form.number_field :eft, step: :any, class: 'form-control', id: 'total-eft' %>
     </div>
 
     <div class="mb-3">
-      <%= form.label :sub, 'SUB TOTAL' %>
-      <%= form.number_field :sub, class: 'form-control calculated-fields', disabled: true %>
+      <%= form.label :refund, 'REFUND' %>
+      <%= form.number_field :refund, step: :any, class: 'form-control', id: 'total-refund' %>
     </div>
 
-    <div class="mb-3">
-      <%= form.label :total, 'TOTAL' %>
-      <%= form.number_field :total, class: 'form-control', disabled: true %>
+    <div id="calculation-fields" class="hide">
+      <div class="mb-3">
+        <%= form.label :sub, 'SUB TOTAL' %>
+        <%= form.text_field :sub, class: 'form-control calculated-fields', disabled: true %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :total, 'TOTAL' %>
+        <%= form.number_field :total, class: 'form-control', disabled: true %>
+      </div>
     </div>
 
     <div class="mb-3">
@@ -42,14 +49,15 @@
       <%= form.text_area :note, class: 'form-control' %>
     </div>
 
+    <button type="button" class="btn btn-primary w-100 mb-3" id="show-calculations">Calculate</button>
+
     <div class="d-flex justify-content-between">
       <div>
         <%= link_to 'Back', cash_ups_path, class: 'btn btn-secondary' %>
       </div>
 
       <div>
-        <%= form.submit class: 'btn btn-primary' %>
-
+        <%= form.submit class: 'btn btn-primary', id: 'create-cash-up-btn', disabled: true %>
       </div>
     </div>
   <% end %>
