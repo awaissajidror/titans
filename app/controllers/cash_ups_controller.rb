@@ -1,5 +1,6 @@
 class CashUpsController < ApplicationController
   before_action :set_cash_up, only: %i[ show edit update destroy ]
+  after_action :populate_fields, only: %i[ create update ]
 
   def index
     @cash_ups = CashUp.paginate(page: params[:page], per_page: 15).order('id DESC')
@@ -39,7 +40,23 @@ class CashUpsController < ApplicationController
     @cash_up = CashUp.find(params[:id])
   end
 
+  def populate_fields
+    sum                = @cash_up.cash + @cash_up.card + @cash_up.eft
+    sub_total          = sum - @cash_up.refund
+
+    @cash_up.sub_total = set_sub_string(sum, @cash_up.refund)
+    @cash_up.total     = sub_total
+
+    @cash_up.save
+  end
+
+  def set_sub_string(sum, refund)
+    return "#{sum} - #{refund}" if refund.present? && refund > 0.0
+
+    sum
+  end
+
   def cash_up_params
-    params.require(:cash_up).permit(:cash, :card, :eft, :sub, :total, :note)
+    params.require(:cash_up).permit(:cash, :card, :eft, :sub_total, :total, :refund, :note)
   end
 end

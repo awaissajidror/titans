@@ -16,13 +16,13 @@ ActiveRecord::Schema.define(version: 2023_04_11_091358) do
   enable_extension "plpgsql"
 
   create_table "cash_ups", force: :cascade do |t|
+    t.text "note"
+    t.float "eft"
     t.float "cash"
     t.float "card"
-    t.float "eft"
-    t.float "sub"
     t.float "total"
     t.float "refund"
-    t.text "note"
+    t.string "sub_total"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

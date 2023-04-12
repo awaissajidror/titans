@@ -238,9 +238,10 @@ $(document).ready(function () {
         const subTotal = `${sum} - ${totalRefund}`;
         const total    = sum - totalRefund;
 
+        debugger;
         // Populate fields
-        $('#cash_up_sub').attr('value', subTotal);
-        $('#cash_up_total').attr('value', total);
+        $('#cash_up_sub_total').attr('value', subTotal);
+        $('#cash_up_total').attr('value', total.toFixed(2));
 
         // Show/Hide functionality
         $('#create-cash-up-btn').prop('disabled', false)
