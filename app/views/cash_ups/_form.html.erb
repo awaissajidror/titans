@@ -14,34 +14,32 @@
 
     <div class="mb-3">
       <%= form.label :cash, 'CASH' %>
-      <%= form.number_field :cash, step: :any, class: 'form-control', id: 'total-cash' %>
+      <%= form.number_field :cash, step: :any, class: 'form-control', id: 'total-cash', value: set_value(form.object.cash) %>
     </div>
 
     <div class="mb-3">
       <%= form.label :card, 'CARD' %>
-      <%= form.number_field :card, step: :any, class: 'form-control', id: 'total-card' %>
+      <%= form.number_field :card, step: :any, class: 'form-control', id: 'total-card', value: set_value(form.object.card) %>
     </div>
 
     <div class="mb-3">
       <%= form.label :eft, 'EFT' %>
-      <%= form.number_field :eft, step: :any, class: 'form-control', id: 'total-eft' %>
+      <%= form.number_field :eft, step: :any, class: 'form-control', id: 'total-eft', value: set_value(form.object.eft) %>
     </div>
 
     <div class="mb-3">
       <%= form.label :refund, 'REFUND' %>
-      <%= form.number_field :refund, step: :any, class: 'form-control', id: 'total-refund' %>
+      <%= form.number_field :refund, step: :any, class: 'form-control', id: 'total-refund', value: set_value(form.object.refund) %>
     </div>
 
-    <div id="calculation-fields" class="hide">
-      <div class="mb-3">
-        <%= form.label :sub, 'SUB TOTAL' %>
-        <%= form.text_field :sub, class: 'form-control calculated-fields', disabled: true %>
-      </div>
+    <div class="mb-3">
+      <%= form.label :sub, 'SUB TOTAL' %>
+      <%= form.text_field :sub, class: 'form-control calculated-fields', disabled: true %>
+    </div>
 
-      <div class="mb-3">
-        <%= form.label :total, 'TOTAL' %>
-        <%= form.number_field :total, class: 'form-control', disabled: true %>
-      </div>
+    <div class="mb-3">
+      <%= form.label :total, 'TOTAL' %>
+      <%= form.number_field :total, class: 'form-control', disabled: true %>
     </div>
 
     <div class="mb-3">

@@ -222,7 +222,6 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('#total-cash, #total-card, #total-eft, #total-refund').on('keyup', function () {
-        $('#calculation-fields').addClass('hide');
         $('#create-cash-up-btn').prop('disabled', true);
     });
 
@@ -235,23 +234,15 @@ $(document).ready(function () {
         const totalRefund = $('#total-refund').val();
 
         // Calculations
-        let cash = (isNaN(totalCash) || totalCash === '' || totalCash === null) ? parseFloat('0.00') : parseFloat(totalCash)
-        let card = (isNaN(totalCard) || totalCard === '' || totalCard === null) ? parseFloat('0.00') : parseFloat(totalCard)
-        let eft  = (isNaN(totalEft) || totalEft === '' || totalEft === null) ? parseFloat('0.00') : parseFloat(totalEft)
-
-        debugger;
-        const sum = cash + card + eft
+        const sum      = (parseFloat(totalCash) + parseFloat(totalCard) + parseFloat(totalEft)).toFixed(2)
         const subTotal = `${sum} - ${totalRefund}`;
-        const Total = sum - totalRefund;
+        const total    = sum - totalRefund;
 
-        debugger;
         // Populate fields
         $('#cash_up_sub').attr('value', subTotal);
-        $('#cash_up_total').attr('value', Total);
+        $('#cash_up_total').attr('value', total);
 
         // Show/Hide functionality
-        $('#calculation-fields').removeClass('hide');
         $('#create-cash-up-btn').prop('disabled', false)
     });
-
 });
