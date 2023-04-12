@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2023_04_11_091358) do
     t.float "eft"
     t.float "sub"
     t.float "total"
+    t.float "refund"
     t.text "note"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

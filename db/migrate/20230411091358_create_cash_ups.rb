@@ -6,6 +6,7 @@ class CreateCashUps < ActiveRecord::Migration[6.1]
       t.float :eft
       t.float :sub
       t.float :total
+      t.float :refund
       t.text :note
 
       t.timestamps
