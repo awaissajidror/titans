@@ -17,6 +17,19 @@ module HomesHelper
     end
   end
 
+  def render_badge_class(card)
+    case card
+    when 'Cash'
+      'bg-primary'
+    when 'EFT'
+      'bg-success'
+    when 'Card'
+      'bg-secondary'
+    else
+      'bg-warning'
+    end
+  end
+
   private
 
   def image_source(card)

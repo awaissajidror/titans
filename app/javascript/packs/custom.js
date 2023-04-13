@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         data: {
             labels: monthNames,
             datasets: [{
-                label: "Sales ($)",
+                label: "Sales (R)",
                 fill: true,
                 backgroundColor: gradient,
                 borderColor: window.theme.primary,
@@ -61,17 +61,22 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+    const this_month_pie = $('#this_month_pie-container').data('source');
+    const typeNames      = this_month_pie.map(obj => obj.type);
+    const salesData      = this_month_pie.map(obj => obj.sales);
+    debugger;
     // Pie chart
     new Chart(document.getElementById("chartjs-dashboard-pie"), {
         type: "pie",
         data: {
-            labels: ["Chrome", "Firefox", "IE"],
+            labels: typeNames,
             datasets: [{
-                data: [4306, 3801, 1689],
+                data: salesData,
                 backgroundColor: [
                     window.theme.primary,
+                    window.theme.success,
+                    window.theme.secondary,
                     window.theme.warning,
-                    window.theme.danger
                 ],
                 borderWidth: 5
             }]
@@ -88,18 +93,22 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+    const monthly_sales = $('#monthly_sales-container').data('source');
+    const monthNames    = monthly_sales.map(obj => obj.month);
+    const salesData     = monthly_sales.map(obj => obj.sales);
+
     // Bar chart
     new Chart(document.getElementById("chartjs-dashboard-bar"), {
         type: "bar",
         data: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            labels: monthNames,
             datasets: [{
-                label: "This year",
+                label: "This year (R)",
                 backgroundColor: window.theme.primary,
                 borderColor: window.theme.primary,
                 hoverBackgroundColor: window.theme.primary,
                 hoverBorderColor: window.theme.primary,
-                data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
+                data: salesData,
                 barPercentage: .75,
                 categoryPercentage: .5
             }]
