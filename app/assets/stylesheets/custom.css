@@ -16,6 +16,10 @@
     display: none !important;
 }
 
+.side-bar-logo-color {
+    color: #e9ecef;
+}
+
 a:hover {
     text-decoration: none;
 }

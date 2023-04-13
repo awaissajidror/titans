@@ -238,7 +238,6 @@ $(document).ready(function () {
         const subTotal = `${sum} - ${totalRefund}`;
         const total    = sum - totalRefund;
 
-        debugger;
         // Populate fields
         $('#cash_up_sub_total').attr('value', subTotal);
         $('#cash_up_total').attr('value', total.toFixed(2));
