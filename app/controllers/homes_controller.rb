@@ -21,6 +21,5 @@ class HomesController < ApplicationController
                                      cash_ups.sum(&:eft)
                             })
     end
-
   end
 end

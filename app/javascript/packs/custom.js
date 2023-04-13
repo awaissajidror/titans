@@ -1,32 +1,25 @@
+
 document.addEventListener("DOMContentLoaded", function () {
-    const ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
-    const gradient = ctx.createLinearGradient(0, 0, 0, 225);
+    const ctx             = document.getElementById("chartjs-dashboard-line").getContext("2d");
+    const recent_movement = $('#recent_movement-container').data('source');
+    const monthNames      = recent_movement.map(obj => obj.month);
+    const salesData       = recent_movement.map(obj => obj.sales);
+    const gradient        = ctx.createLinearGradient(0, 0, 0, 225);
+
     gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
     gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+
     // Line chart
     new Chart(document.getElementById("chartjs-dashboard-line"), {
         type: "line",
         data: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            labels: monthNames,
             datasets: [{
                 label: "Sales ($)",
                 fill: true,
                 backgroundColor: gradient,
                 borderColor: window.theme.primary,
-                data: [
-                    2115,
-                    1562,
-                    1584,
-                    1892,
-                    1587,
-                    1923,
-                    2566,
-                    2448,
-                    2805,
-                    3438,
-                    2917,
-                    3327
-                ]
+                data: salesData
             }]
         },
         options: {
