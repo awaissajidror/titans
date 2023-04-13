@@ -24,6 +24,15 @@
     font-size: 13px;
 }
 
+.no-border {
+    border: none !important;
+}
+
+.card-amount {
+    font-weight: 500 !important;
+    font-size: 1.75rem !important;
+}
+
 a:hover {
     text-decoration: none;
 }

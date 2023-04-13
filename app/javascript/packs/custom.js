@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const this_month_pie = $('#this_month_pie-container').data('source');
     const typeNames      = this_month_pie.map(obj => obj.type);
     const salesData      = this_month_pie.map(obj => obj.sales);
-    debugger;
+
     // Pie chart
     new Chart(document.getElementById("chartjs-dashboard-pie"), {
         type: "pie",

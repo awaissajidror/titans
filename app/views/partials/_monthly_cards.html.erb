@@ -3,11 +3,11 @@
     <div class="row">
       <% @cards.each do |card| %>
         <div class="col-sm-6">
-          <div class="card">
+          <div class="card no-border">
             <div class="card-body">
               <div class="row">
                 <div class="col mt-0">
-                  <h5 class="card-title"><%= card.upcase %></h5>
+                  <h1 class="card-title"><%= card.upcase %></h1>
                 </div>
 
                 <div class="col-auto">
@@ -16,7 +16,7 @@
                   </div>
                 </div>
               </div>
-              <h1 class="mt-1 mb-3">R <%= render_amount(card) %></h1>
+              <h4 class="mt-1 mb-3">R <%= render_amount(card) %></h4>
               <div class="mb-0">
                 <!--                <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>-->
                 <span class="text-muted font-13">Total <%= card %> This Month</span>
