@@ -35,13 +35,13 @@ module HomesHelper
   def image_source(card)
     case card
     when 'Cash'
-      '/assets/rand_vector.svg'
+      '/assets/payment-method.png'
     when 'EFT'
-      '/assets/eft_vectors.png'
+      '/assets/eft.png'
     when 'Card'
       '/assets/credit_card.png'
     else
-      '/assets/refund.svg'
+      '/assets/refund.png'
     end
   end
 end
