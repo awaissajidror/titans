@@ -33,7 +33,7 @@
       <td><%= cash_up.sub_total %></td>
       <td><%= cash_up.total %></td>
       <td><%= cash_up.note %></td>
-      <td><%= cash_up.created_at.strftime('%m-%d-%Y') %></td>
+      <td><%= cash_up.created_at.strftime('%d-%b-%Y') %></td>
       <td>
         <%= link_to edit_cash_up_path(cash_up), class: 'no-text-deco' do %>
           <i class="align-middle me-2 text-secondary" data-feather="edit"></i>
