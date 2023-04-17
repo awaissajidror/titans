@@ -1,34 +1,95 @@
-<p id="notice"><%= notice %></p>
+<% unless params[:action] == 'generate_pdf' %>
+  <div class="d-flex justify-content-end mb-3">
+    <%= link_to generate_pdf_cash_up_path(@cash_up, format: :pdf), target: '_blank' do %>
+      <%= image_tag('/assets/pdf.png', width: '60') %>
+    <% end %>
+  </div>
+<% end %>
 
-<p>
-  <strong>Cash:</strong>
-  <%= @cash_up.cash %>
-</p>
+<div id="content">
+  <div class="card">
+    <div class="card-header bg-primary"></div>
+    <div class="card-body">
 
-<p>
-  <strong>Card:</strong>
-  <%= @cash_up.card %>
-</p>
-
-<p>
-  <strong>Eft:</strong>
-  <%= @cash_up.eft %>
-</p>
-
-<p>
-  <strong>Sub:</strong>
-  <%= @cash_up.sub_total %>
-</p>
-
-<p>
-  <strong>Total:</strong>
-  <%= @cash_up.total %>
-</p>
-
-<p>
-  <strong>Note:</strong>
-  <%= @cash_up.note %>
-</p>
-
-<%= link_to 'Edit', edit_cash_up_path(@cash_up) %> |
-<%= link_to 'Back', cash_ups_path %>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <i class="far fa-building text-danger fa-6x float-start"></i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12">
+            <ul class="list-unstyled float-end">
+              <li style="font-size: 30px; color: red;">Jawad Works</li>
+              <li>73 Rebecca Street pretoria west</li>
+              <li>usamasajid86@gmail.com</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row text-center">
+          <h3 class="text-uppercase text-center mt-3" style="font-size: 40px;">Cash Up</h3>
+        </div>
+        <div class="row mx-3">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Description</th>
+              <th scope="col">Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Cash</td>
+              <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.card) %></td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.card) %></td>
+            </tr>
+            <tr>
+              <td>EFT</td>
+              <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.eft) %></td>
+            </tr>
+            <tr>
+              <td>Refund</td>
+              <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.refund) %></td>
+            </tr>
+            <tr>
+              <td>Note</td>
+              <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.note) %></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-xl-8">
+            <ul class="list-unstyled float-end me-0">
+              <li>
+                <span class="me-3 float-start">Sub Total</span><i class="fas fa-dollar-sign"></i>
+                <%= set_value(@cash_up.sub_total) %>
+              </li>
+              <li>
+                <span class="me-3 float-start">Total Amount:</span><i class="fas fa-dollar-sign"></i>
+                <%= set_value(@cash_up.total) %>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xl-8" style="margin-left:60px">
+            <p class="float-end"
+               style="font-size: 30px; color: red; font-weight: 400;font-family: Arial, Helvetica, sans-serif;">
+              Total:
+              <span><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.total) %></span></p>
+          </div>
+        </div>
+        <div class="row mt-2 mb-5">
+          <p class="fw-bold">Date: <span class="text-muted"><%= @cash_up.created_at.strftime('%d-%B-%Y') %></span></p>
+          <p class="fw-bold mt-3">Signature: _______________</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer bg-primary"></div>
+  </div>
+</div>

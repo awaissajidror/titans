@@ -36,17 +36,21 @@
       <td><%= cash_up.created_at.strftime('%d-%b-%Y') %></td>
       <td>
         <%= link_to edit_cash_up_path(cash_up), class: 'no-text-deco' do %>
-          <i class="align-middle me-2 text-secondary" data-feather="edit"></i>
+          <img src="/assets/edit.png" alt="Edit Icon" width="20">
         <% end %>
 
         <span class="mx-3">|</span>
 
-        <i class="align-middle me-2 delete-cash-up text-danger cursor-pointer"
-           data-bs-toggle="modal"
-           data-bs-target="#exampleModal-<%= cash_up.id %>"
-           data-feather="trash-2">
-        </i>
+        <img class="delete-cash-up cursor-pointer"
+             data-bs-toggle="modal"
+             data-bs-target="#exampleModal-<%= cash_up.id %>"
+             alt="Trash Icon" src="/assets/delete.png" width="20">
 
+        <span class="mx-3">|</span>
+
+        <%= link_to cash_up_path(cash_up.id) do %>
+          <%= image_tag('/assets/eye.png', width: '30') %>
+        <% end %>
       </td>
     </tr>
 

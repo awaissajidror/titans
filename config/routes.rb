@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
-  resources :cash_ups
+  root 'homes#index'
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     passwords: 'users/passwords',
     registrations: 'users/registrations',
   }
 
-  root 'homes#index'
+  resources :cash_ups do
+    member do
+      get :generate_pdf
+    end
+  end
+
 end
