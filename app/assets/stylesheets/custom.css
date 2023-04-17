@@ -37,6 +37,15 @@ a:hover {
     text-decoration: none;
 }
 
+.clickable-row {
+    cursor: pointer;
+}
+
+.clickable-row:hover {
+    background: #1ab7ea;
+}
+
+
 .digg_pagination {
     cursor: default;
     float: right !important;
