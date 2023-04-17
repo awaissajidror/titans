@@ -1,9 +1,110 @@
-<div class="row">
-  <div class="col-xl-12">
-    <ul style="list-style:none; padding-left:0; float:right!important">
-      <li style="font-size: 30px; color: red;">Jawad Works</li>
-      <li>73 Rebecca Street pretoria west</li>
-      <li>usamasajid86@gmail.com</li>
-    </ul>
+<div id="content" style="font-size: 25px;">
+  <div class="card-body">
+
+    <!-- Owner & Address -->
+    <div class="row">
+      <div class="col-xl-12">
+        <ul class="list-unstyled float-end">
+          <li class="owner-text">Jawad Works</li>
+          <li class="address-width">73 Rebecca Street pretoria west</li>
+          <li>usamasajid86@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <br><br><br><br><br><br>
+
+    <!-- Cash Up Text -->
+    <div class="row text-center">
+      <h3 class="text-uppercase text-center mt-3 font-40">Cash Up</h3>
+    </div>
+
+    <!-- Table -->
+    <div class="row mx-3">
+      <table class="table">
+        <thead>
+        <tr class="border-setting">
+          <th><span class="float-left">Description</span></th>
+          <th><span class="float-left">Amount</span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="border-setting">
+          <td>Cash</td>
+          <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.card) %></td>
+        </tr>
+        <tr class="border-setting">
+          <td>Card</td>
+          <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.card) %></td>
+        </tr>
+        <tr class="border-setting">
+          <td>EFT</td>
+          <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.eft) %></td>
+        </tr>
+        <tr class="border-setting">
+          <td>Refund</td>
+          <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.refund) %></td>
+        </tr>
+        <tr class="border-setting">
+          <td>Note</td>
+          <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.note) %></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sub Total / Total / Red Total -->
+
+    <table class="table" style="border: transparent !important;">
+      <tbody>
+      <tr>
+        <td></td>
+        <td class="float-end"><b>Sub Total: </b><%= set_value(@cash_up.sub_total) %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="float-end"><span class="red-total-style">Total: <%= set_value(@cash_up.total) %></span></td>
+      </tr>
+      </tbody>
+    </table>
+    <br>
+
+    <!-- Date / Signature -->
+    <div class="row mt-2 mb-5">
+      <p class="fw-bold">Date: <span class="text-muted"><%= @cash_up.created_at.strftime('%d-%B-%Y') %></span></p>
+      <p class="fw-bold mt-3">Signature: _______________</p>
+    </div>
   </div>
 </div>
+
+<style>
+    .owner-text {
+        color: red;
+        font-size: 30px;
+    }
+
+    .font-40 {
+        font-size: 40px;
+    }
+
+    .red-total-style {
+        color: red;
+        font-size: 30px;
+        font-weight: 400;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .float-left {
+        float: left !important;
+    }
+
+    .no-border {
+        border: none !important;
+    }
+
+    .border-setting {
+        border-bottom: #dee2e6;
+        border-top: transparent;
+        border-left: transparent;
+        border-right: transparent;
+    }
+</style>

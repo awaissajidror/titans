@@ -41,7 +41,7 @@ class CashUpsController < ApplicationController
                page_size: 'A4',
                layout: 'pdf.html',
                template: 'cash_ups/cashup.html.erb',
-               encoding:"UTF-8"
+               encoding: 'UTF-8'
       end
     end
   end
