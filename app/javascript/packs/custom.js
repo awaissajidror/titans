@@ -14,9 +14,9 @@ $(document).ready(function () {
         const totalRefund = $('#total-refund').val();
 
         // Calculations
-        const sum      = (parseFloat(totalCash) + parseFloat(totalCard) + parseFloat(totalEft)).toFixed(2)
-        const subTotal = `${sum} - ${totalRefund}`;
-        const total    = sum - totalRefund;
+        const sum     = (parseFloat(totalCash) + parseFloat(totalCard) + parseFloat(totalEft)).toFixed(2)
+        const subTotal= `${sum} - ${totalRefund}`;
+        const total = sum - totalRefund;
 
         // Populate fields
         $('#cash_up_sub_total').attr('value', subTotal);
@@ -29,6 +29,14 @@ $(document).ready(function () {
     // Total Cash Calculations
     $('#total-cash, #total-card, #total-eft, #total-refund').on('keyup', function () {
         $('#create-cash-up-btn').prop('disabled', true);
+    });
+
+    $("#generate-report").click(function() {
+        if ($('#search-content').hasClass('hide')) {
+            $("#search-content").removeClass('hide');
+        } else {
+            $("#search-content").addClass('hide');
+        }
     });
 });
 

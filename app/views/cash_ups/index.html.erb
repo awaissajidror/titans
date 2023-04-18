@@ -1,10 +1,28 @@
-<div class="d-flex justify-content-between">
-  <div>
-    <h1>Cash Up</h1>
-  </div>
+<div id="search-content" class="hide">
+  <%= render partial: 'cash_ups/search_filters' %>
+</div>
 
-  <div class="my-auto">
-    <%= link_to '+ Cash Up', new_cash_up_path, class: 'pull-right btn btn-primary' %>
+<div class="d-flex justify-content-between">
+
+  <%= render partial: 'cash_ups/heading' %>
+
+
+  <div class="d-flex justify-content-end">
+    <% if params[:cash_up].present? && params[:cash_up][:month].present? %>
+      <div class="my-auto">
+        <%= link_to cash_ups_path(cash_ups: @cash_ups.to_json, format: :csv) do %>
+          <%= image_tag('/assets/import.png', width: '30') %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="my-auto">
+      <button type="button" class="btn btn-secondary mx-3" id="generate-report">Generate Report</button>
+    </div>
+
+    <div class="my-auto">
+      <%= link_to '+ Cash Up', new_cash_up_path, class: 'pull-right btn btn-primary' %>
+    </div>
   </div>
 </div>
 
@@ -25,26 +43,34 @@
 
   <tbody>
   <% @cash_ups.each do |cash_up| %>
-    <tr onclick="location.href='<%= cash_up_path(cash_up) %>';" class="clickable-row">
+    <tr>
       <td><%= cash_up.cash %></td>
       <td><%= cash_up.card %></td>
       <td><%= cash_up.eft %></td>
       <td><%= cash_up.refund %></td>
       <td><%= cash_up.sub_total %></td>
       <td><%= cash_up.total %></td>
-      <td><%= cash_up.note.truncate_words(4) %></td>
+      <td>
+        <a data-bs-toggle="tooltip" data-bs-html="true" title="<%= cash_up.note %>">
+          <%= cash_up.note.truncate_words(4) %>
+        </a>
+      </td>
       <td><%= cash_up.created_at.strftime('%d-%b-%Y') %></td>
       <td>
         <%= link_to edit_cash_up_path(cash_up), class: 'no-text-deco' do %>
-          <img src="/assets/edit.png" alt="Edit Icon" width="20">
+          <%= image_tag('/assets/edit.png', alt: 'Edit Icon', width: '20') %>
         <% end %>
 
         <span class="mx-3">|</span>
 
-        <img class="delete-cash-up cursor-pointer"
-             data-bs-toggle="modal"
-             data-bs-target="#exampleModal-<%= cash_up.id %>"
-             alt="Trash Icon" src="/assets/delete.png" width="20">
+        <%= image_tag('/assets/trash.png', alt: 'Trash Icon', width: '20', class: 'delete-cash-up cursor-pointer',
+                      data: { 'bs-toggle': 'modal', 'bs-target': "#exampleModal-#{cash_up.id}" }) %>
+
+        <span class="mx-3">|</span>
+
+        <%= link_to cash_up_path(cash_up.id) do %>
+          <%= image_tag('/assets/eye.png', width: '30') %>
+        <% end %>
       </td>
     </tr>
 

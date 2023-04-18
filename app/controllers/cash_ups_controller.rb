@@ -3,7 +3,38 @@ class CashUpsController < ApplicationController
   after_action :populate_fields, only: %i[ create update ]
 
   def index
-    @cash_ups = CashUp.paginate(page: params[:page], per_page: 15).order('id DESC')
+    if params[:cash_up].present? && params[:cash_up][:month].present?
+      cash_ups_of_month
+    elsif params[:format].present? && params[:format] == 'csv'
+      require 'csv'
+
+      cash_ups        = params[:cash_ups]
+      parsed_response = JSON.parse(cash_ups)
+      total_eft       = parsed_response.map { |hash| hash['eft'] }.reduce(:+)
+      total_cash      = parsed_response.map { |hash| hash['cash'] }.reduce(:+)
+      total_card      = parsed_response.map { |hash| hash['card'] }.reduce(:+)
+      total           = parsed_response.map { |hash| hash['total'] }.reduce(:+)
+      total_refund    = parsed_response.map { |hash| hash['refund'] }.reduce(:+)
+      total_sub       = "#{total_cash + total_card + total_eft} - #{total_refund}"
+
+      csv_data = CSV.generate(headers: true) do |csv|
+        csv << %w[Cash Card EFT Refund Note Sub-Total Total]
+        parsed_response.each do |data|
+
+          keys_to_delete = %w[id created_at updated_at]
+          keys_to_delete.each { |key| data.delete(key) }
+
+          csv << [data['cash'], data['card'], data['eft'], data['refund'], data['note'], data['sub_total'], data['total']]
+        end
+        csv << ['', '', '', '', '', '', '']
+        csv << ['Total Cash', 'Total Card', 'Total EFT', 'Total Refund', '', 'Total Sub', 'Total']
+        csv << [total_cash, total_card, total_eft, total_refund, '', total_sub, total]
+      end
+      
+      send_data csv_data, filename: "#{Date.today.strftime('%B')}.csv", disposition: :attachment
+    else
+      total_cash_ups
+    end
   end
 
   def show; end
@@ -70,5 +101,20 @@ class CashUpsController < ApplicationController
 
   def cash_up_params
     params.require(:cash_up).permit(:cash, :card, :eft, :sub_total, :total, :refund, :note)
+  end
+
+  def cash_ups_of_month
+    month_number = Date::MONTHNAMES.index(params[:cash_up][:month])
+    start_date   = DateTime.new(Date.current.year, month_number, 1)
+    end_date     = start_date.end_of_month
+
+    @cash_ups = CashUp.between(start_date, end_date)
+                      .paginate(page: params[:page], per_page: 15)
+                      .order('id DESC')
+  end
+
+  def total_cash_ups
+    @cash_ups = CashUp.paginate(page: params[:page], per_page: 15)
+                      .order('id DESC')
   end
 end

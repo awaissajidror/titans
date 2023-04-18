@@ -1,0 +1,14 @@
+<%= form_tag '/cash_ups', method: :get do %>
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <%= label_tag :by_month, 'By Month' %>
+        <%= select_tag 'cash_up[month]', options_for_select(Date::MONTHNAMES.slice(1..-1)), class: 'form-control', prompt: 'Select Month' %>
+      </div>
+    </div>
+  </div>
+
+  <!-- ... other form fields ... -->
+
+  <%= submit_tag 'Search', class: 'my-3 btn btn-primary' %>
+<% end %>
