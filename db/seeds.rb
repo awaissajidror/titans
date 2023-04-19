@@ -1,1 +1,1 @@
-CreateUserService.call('Osama Sajid', 'usamasajid86@gmail.com', 'Osama@86')
+CreateUserService.call('Osama Sajid', 'usamasajid86@gmail.com', 'Osama@86', '+27 71 794 1883', 2)
