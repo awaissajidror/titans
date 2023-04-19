@@ -8,3 +8,7 @@ default: &default
 development:
   <<: *default
   database: titans_development
+
+production:
+  <<: *default
+  database: titans_production
