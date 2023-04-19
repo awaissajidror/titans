@@ -13,8 +13,4 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_scope :user do
-    resources :users
-  end
-
 end
