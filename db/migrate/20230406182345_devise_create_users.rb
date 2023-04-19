@@ -33,8 +33,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       # t.datetime :locked_at
 
       # User Column
+      t.string :phone_number,      null: false, default: ''
       t.string :name,               null: false, default: ''
-      t.integer :phone_number,      null: false, default: ''
       t.integer :role,              null: false, default: 3
 
 
