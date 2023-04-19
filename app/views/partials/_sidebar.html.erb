@@ -19,6 +19,12 @@
           <i class="align-middle" data-feather="user"></i> <span class="align-middle">Cash Up</span>
         </a>
       </li>
+
+      <li class="sidebar-item <%= 'active' if current_page?(users_path) %>">
+        <a class="sidebar-link" href="<%= users_path %>">
+          <i class="align-middle" data-feather="user"></i> <span class="align-middle">Add Employee</span>
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
