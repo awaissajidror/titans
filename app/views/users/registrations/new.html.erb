@@ -8,7 +8,7 @@
               <div class="card-body p-md-5 mx-md-4">
 
                 <div class="text-center mb-5 pb-1">
-                  <img src="/assets/app_logo.jpg" style="width: 185px;" alt="logo">
+                  <%= image_tag('app_logo.jpg', style: 'width: 185px;', alt: 'logo') %>
                 </div>
 
                 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -46,8 +46,8 @@
               </div>
             </div>
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-              <img src="https://cdn11.bigcommerce.com/s-xf1j2e32mt/images/stencil/1280x1280/products/19384/30233/simbapumbatimonladybug__30067.1651535547.jpg?c=1"
-                   alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+              <%= image_tag('https://cdn11.bigcommerce.com/s-xf1j2e32mt/images/stencil/1280x1280/products/19384/30233/simbapumbatimonladybug__30067.1651535547.jpg?c=1',
+                            alt: 'Login image', class: 'w-100 vh-100', style: 'object-fit: cover; object-position: left;') %>
             </div>
           </div>
         </div>

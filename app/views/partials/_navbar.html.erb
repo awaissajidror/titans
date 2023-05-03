@@ -8,7 +8,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
           <%= link_to destroy_user_session_path, method: :delete, class: 'no-text-deco' do %>
-            <img src="<%= '/assets/logout.png' %>" class="avatar img-fluid rounded me-1" alt="Charles Hall"/>
+            <%= image_tag('logout.png', alt: 'Charles Hall', class: 'avatar img-fluid rounded me-1') %>
           <% end %>
         </a>
       </li>

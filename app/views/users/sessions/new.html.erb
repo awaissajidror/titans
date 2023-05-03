@@ -8,7 +8,7 @@
               <div class="card-body p-md-5 mx-md-4">
 
                 <div class="text-center mb-5 pb-1">
-                  <img src="/assets/app_logo.jpg" style="width: 185px;" alt="logo">
+                  <%= image_tag('app_logo.jpg', alt: 'logo', style: 'width: 185px;') %>
                 </div>
 
                 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -52,8 +52,8 @@
               </div>
             </div>
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-              <img src="https://pngimg.com/uploads/lion_king/lion_king_PNG17.png"
-                   alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+              <%= image_tag('https://pngimg.com/uploads/lion_king/lion_king_PNG17.png', class: 'w-100 vh-100',
+                            style: 'object-fit: cover; object-position: left;', alt: 'Login image') %>
             </div>
           </div>
         </div>
