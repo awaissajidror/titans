@@ -23,7 +23,6 @@ class CashUpsController < ApplicationController
 
           keys_to_delete = %w[id created_at updated_at]
           keys_to_delete.each { |key| data.delete(key) }
-
           csv << [data['cash'], data['card'], data['eft'], data['refund'], data['note'], data['sub_total'], data['total']]
         end
         csv << ['', '', '', '', '', '', '']
@@ -32,6 +31,19 @@ class CashUpsController < ApplicationController
       end
 
       send_data csv_data, filename: "#{Date.today.strftime('%B')}.csv", disposition: :attachment
+    elsif params[:cash_ups].present? && params[:spr_report].present?
+      cash_ups        = params[:cash_ups]
+      parsed_response = JSON.parse(cash_ups)
+      @total_eft       = parsed_response.map { |hash| hash['eft'] }.reduce(:+)
+      @total_cash      = parsed_response.map { |hash| hash['cash'] }.reduce(:+)
+      @total_card      = parsed_response.map { |hash| hash['card'] }.reduce(:+)
+      @total           = parsed_response.map { |hash| hash['total'] }.reduce(:+)
+      @total_refund    = parsed_response.map { |hash| hash['refund'] }.reduce(:+)
+      @total_sub       = "#{@total_cash + @total_card + @total_eft} - #{@total_refund}"
+      @month           = Date.parse(parsed_response.last['cash_up_date']).strftime('%B')
+      redirect_to sp_report_cash_ups_url(total_eft: @total_eft, total_cash: @total_cash, total_card: @total_card,
+                                         total: @total, total_refund: @total_refund, total_sub: @total_sub,
+                                         month: @month)
     else
       total_cash_ups
     end
@@ -72,6 +84,20 @@ class CashUpsController < ApplicationController
                page_size: 'A4',
                layout: 'pdf.html',
                template: 'cash_ups/cashup.html.erb',
+               encoding: 'UTF-8'
+      end
+    end
+  end
+
+  def generate_sp_pdf
+    month = params[:data].as_json['month']
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "CashUp-Of#{Date.parse(month).strftime('%B')}",
+               page_size: 'A4',
+               layout: 'pdf.html',
+               template: 'cash_ups/sp.html.erb',
                encoding: 'UTF-8'
       end
     end

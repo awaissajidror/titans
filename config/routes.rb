@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     member do
       get :generate_pdf
     end
+    collection do
+      get :sp_report
+      get :generate_sp_pdf
+    end
   end
 
 end

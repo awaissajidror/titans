@@ -1,6 +1,6 @@
 <% unless params[:action] == 'generate_pdf' %>
   <div class="d-flex justify-content-end mb-3">
-    <%= link_to generate_pdf_cash_up_path(@cash_up, format: :pdf), target: '_blank' do %>
+    <%= link_to generate_sp_pdf_cash_ups_path(data: params.as_json, format: :pdf), target: '_blank' do %>
       <%= image_tag('/assets/pdf.png', width: '60') %>
     <% end %>
   </div>
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="row text-center">
-          <h3 class="text-uppercase text-center mt-3" style="font-size: 40px;">Cash Up</h3>
+          <h3 class="text-uppercase text-center mt-3" style="font-size: 40px;">Month End <%= params[:month] %></h3>
         </div>
         <div class="row mx-3">
           <table class="table">
@@ -39,24 +39,20 @@
             </thead>
             <tbody>
             <tr>
-              <td>Cash</td>
-              <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.card) %></td>
+              <td>Total Cash</td>
+              <td><i class="fas fa-dollar-sign"></i><%= params[:total_cash] %></td>
             </tr>
             <tr>
-              <td>Card</td>
-              <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.card) %></td>
+              <td>Total Card</td>
+              <td><i class="fas fa-dollar-sign"></i><%= params[:total_card] %></td>
             </tr>
             <tr>
-              <td>EFT</td>
-              <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.eft) %></td>
+              <td>Total EFT</td>
+              <td><i class="fas fa-dollar-sign"></i><%= params[:total_eft] %></td>
             </tr>
             <tr>
-              <td>Refund</td>
-              <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.refund) %></td>
-            </tr>
-            <tr>
-              <td>Note</td>
-              <td><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.note) %></td>
+              <td>Total Refund</td>
+              <td><i class="fas fa-dollar-sign"></i><%= params[:total_refund] %></td>
             </tr>
             </tbody>
           </table>
@@ -65,12 +61,12 @@
           <div class="col-xl-12">
             <ul class="list-unstyled float-end me-0">
               <li>
-                <span class="me-3 float-start">Sub Total</span><i class="fas fa-dollar-sign"></i>
-                <%= set_value(@cash_up.sub_total) %>
+                <span class="me-3 float-start">Total Sub</span><i class="fas fa-dollar-sign"></i>
+                <%= params[:total_sub] %>
               </li>
               <li>
                 <span class="me-3 float-start">Total Amount:</span><i class="fas fa-dollar-sign"></i>
-                <%= set_value(@cash_up.total) %>
+                <%= params[:total] %>
               </li>
             </ul>
           </div>
@@ -81,11 +77,11 @@
             <p class="float-end"
                style="font-size: 30px; color: red; font-weight: 400;font-family: Arial, Helvetica, sans-serif;">
               Total:
-              <span><i class="fas fa-dollar-sign"></i><%= set_value(@cash_up.total) %></span></p>
+              <span><i class="fas fa-dollar-sign"></i><%= params[:total] %></span></p>
           </div>
         </div>
         <div class="row mt-2 mb-5">
-          <p class="fw-bold">Date: <span class="text-muted"><%= @cash_up.created_at.strftime('%d-%B-%Y') %></span></p>
+          <p class="fw-bold">Date: <span class="text-muted"><%= Time.zone.now.strftime('%d-%B-%Y') %></span></p>
           <p class="fw-bold mt-3">Signature: _______________</p>
         </div>
       </div>
