@@ -1,6 +1,6 @@
 class CashUpsController < ApplicationController
   before_action :set_cash_up, only: %i[ show edit update destroy generate_pdf ]
-  after_action :populate_fields, only: %i[ create update ]
+  # after_action :populate_fields, only: %i[ create update ]
 
   def index
     if params[:cash_up].present? && params[:cash_up][:month].present?
@@ -8,14 +8,14 @@ class CashUpsController < ApplicationController
     elsif params[:cash_ups].present? && params[:csv_report].present?
       require 'csv'
 
-      cash_ups        = params[:cash_ups]
+      cash_ups = params[:cash_ups]
       parsed_response = JSON.parse(cash_ups)
-      total_eft       = parsed_response.map { |hash| hash['eft'] }.reduce(:+)
-      total_cash      = parsed_response.map { |hash| hash['cash'] }.reduce(:+)
-      total_card      = parsed_response.map { |hash| hash['card'] }.reduce(:+)
-      total           = parsed_response.map { |hash| hash['total'] }.reduce(:+)
-      total_refund    = parsed_response.map { |hash| hash['refund'] }.reduce(:+)
-      total_sub       = "#{total_cash + total_card + total_eft} - #{total_refund}"
+      total_eft = parsed_response.map { |hash| hash['eft'] }.reduce(:+)
+      total_cash = parsed_response.map { |hash| hash['cash'] }.reduce(:+)
+      total_card = parsed_response.map { |hash| hash['card'] }.reduce(:+)
+      total = parsed_response.map { |hash| hash['total'] }.reduce(:+)
+      total_refund = parsed_response.map { |hash| hash['refund'] }.reduce(:+)
+      total_sub = "#{total_cash + total_card + total_eft} - #{total_refund}"
 
       csv_data = CSV.generate(headers: true) do |csv|
         csv << %w[Cash Card EFT Refund Note Sub-Total Total]
@@ -32,15 +32,15 @@ class CashUpsController < ApplicationController
 
       send_data csv_data, filename: "#{Date.today.strftime('%B')}.csv", disposition: :attachment
     elsif params[:cash_ups].present? && params[:spr_report].present?
-      cash_ups        = params[:cash_ups]
+      cash_ups = params[:cash_ups]
       parsed_response = JSON.parse(cash_ups)
-      @total_eft       = parsed_response.map { |hash| hash['eft'] }.reduce(:+)
-      @total_cash      = parsed_response.map { |hash| hash['cash'] }.reduce(:+)
-      @total_card      = parsed_response.map { |hash| hash['card'] }.reduce(:+)
-      @total           = parsed_response.map { |hash| hash['total'] }.reduce(:+)
-      @total_refund    = parsed_response.map { |hash| hash['refund'] }.reduce(:+)
-      @total_sub       = "#{@total_cash + @total_card + @total_eft} - #{@total_refund}"
-      @month           = Date.parse(parsed_response.last['cash_up_date']).strftime('%B')
+      @total_eft = parsed_response.map { |hash| hash['eft'] }.reduce(:+)
+      @total_cash = parsed_response.map { |hash| hash['cash'] }.reduce(:+)
+      @total_card = parsed_response.map { |hash| hash['card'] }.reduce(:+)
+      @total = parsed_response.map { |hash| hash['total'] }.reduce(:+)
+      @total_refund = parsed_response.map { |hash| hash['refund'] }.reduce(:+)
+      @total_sub = "#{@total_cash + @total_card + @total_eft} - #{@total_refund}"
+      @month = Date.parse(parsed_response.last['cash_up_date']).strftime('%B')
       redirect_to sp_report_cash_ups_url(total_eft: @total_eft, total_cash: @total_cash, total_card: @total_card,
                                          total: @total, total_refund: @total_refund, total_sub: @total_sub,
                                          month: @month)
@@ -59,8 +59,7 @@ class CashUpsController < ApplicationController
   end
 
   def create
-    @cash_up = CashUp.new(cash_up_params)
-    @cash_up.save
+    CashUps::CreateCashUpService.call(cash_up_params)
     flash[:success] = 'CashUp Added Successfully!'
     redirect_to cash_ups_url
   end
@@ -109,30 +108,14 @@ class CashUpsController < ApplicationController
     @cash_up = CashUp.find(params[:id])
   end
 
-  def populate_fields
-    sum = @cash_up.cash + @cash_up.card + @cash_up.eft
-    sub_total = sum - @cash_up.refund
-
-    @cash_up.sub_total = set_sub_string(sum, @cash_up.refund)
-    @cash_up.total = sub_total
-
-    @cash_up.save
-  end
-
-  def set_sub_string(sum, refund)
-    return "#{sum} - #{refund}" if refund.present? && refund > 0.0
-
-    sum
-  end
-
   def cash_up_params
     params.require(:cash_up).permit(:cash, :card, :eft, :sub_total, :total, :refund, :note, :cash_up_date)
   end
 
   def cash_ups_of_month
     month_number = Date::MONTHNAMES.index(params[:cash_up][:month])
-    start_date   = DateTime.new(Date.current.year, month_number, 1)
-    end_date     = start_date.end_of_month
+    start_date = DateTime.new(Date.current.year, month_number, 1)
+    end_date = start_date.end_of_month
 
     @cash_ups = CashUp.between(start_date, end_date)
                       .paginate(page: params[:page], per_page: 15)

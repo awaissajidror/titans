@@ -7,7 +7,7 @@
   <%= render partial: 'cash_ups/heading' %>
 
   <div class="d-flex justify-content-end">
-    <% if params[:cash_up].present? && params[:cash_up][:month].present? %>
+    <% if params[:cash_ups].present? && params[:cash_ups][:month].present? %>
       <div class="my-auto">
         <%= image_tag '/assets/import.png', width: '30', id: 'import-cash-up-report',
                       data: { 'bs-toggle': 'modal', 'bs-target': '#reportModal' } %>
@@ -72,12 +72,29 @@
       </td>
     </tr>
 
-    <!-- Modals -->
-    <%= render partial: 'partials/cash_up_delete_modal', locals: { cash_up: cash_up } %>
-    <%= render partial: 'partials/cash_up_report_modal' %>
+    <!-- Delete Modals -->
+    <div class="modal fade" id="exampleModal-<%= cash_up.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <%= link_to 'Delete', cash_up, method: :delete, class: 'btn btn-danger' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
   <% end %>
   </tbody>
 </table>
+
+<%= render partial: 'partials/cash_up_report_modal' %>
 
 <div class="digg_pagination">
   <%= will_paginate @cash_ups, :container => false %>
