@@ -5,7 +5,7 @@ class CashUpsController < ApplicationController
   def index
     if params[:cash_up].present? && params[:cash_up][:month].present?
       cash_ups_of_month
-    elsif params[:format].present? && params[:format] == 'csv'
+    elsif params[:cash_ups].present? && params[:csv_report].present?
       require 'csv'
 
       cash_ups        = params[:cash_ups]
