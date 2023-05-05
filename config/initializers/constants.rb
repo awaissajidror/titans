@@ -1,0 +1,1 @@
+MONTH_DROPDOWN = Date::MONTHNAMES.slice(1..-1)

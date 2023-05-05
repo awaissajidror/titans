@@ -1,14 +1,15 @@
 <%= form_tag '/cash_ups', method: :get do %>
-  <div class="row">
-    <div class="col-4">
-      <div class="form-group">
-        <%= label_tag :by_month, 'By Month' %>
-        <%= select_tag 'cash_up[month]', options_for_select(Date::MONTHNAMES.slice(1..-1)), class: 'form-control', prompt: 'Select Month' %>
-      </div>
+  <div class="d-flex justify-content-start">
+    <div class="form-group col-4">
+      <%= label_tag :generate_csv, 'CSV Report' %>
+      <%= select_tag 'cash_up[by_csv]', options_for_select(MONTH_DROPDOWN), class: 'form-control', prompt: 'Select Month' %>
+    </div>
+
+    <div class="form-group col-4 ml-10px">
+      <%= label_tag :generate_total, 'Single Page Report' %>
+      <%= select_tag 'cash_up[by_spr]', options_for_select(MONTH_DROPDOWN), class: 'form-control', prompt: 'Select Month' %>
     </div>
   </div>
-
-  <!-- ... other form fields ... -->
 
   <%= submit_tag 'Search', class: 'my-3 btn btn-primary' %>
 <% end %>

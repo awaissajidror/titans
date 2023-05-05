@@ -7,7 +7,7 @@
   <%= render partial: 'cash_ups/heading' %>
 
   <div class="d-flex justify-content-end">
-    <% if params[:cash_up].present? && params[:cash_up][:month].present? %>
+    <% if params[:cash_up].present? && params[:cash_up][:by_csv].present? %>
       <div class="my-auto">
         <%= link_to cash_ups_path(cash_ups: @cash_ups.to_json, format: :csv) do %>
           <%= image_tag('/assets/import.png', width: '30') %>
