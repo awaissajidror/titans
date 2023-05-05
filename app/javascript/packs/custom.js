@@ -1,5 +1,15 @@
 // Custom JS
 $(document).ready(function () {
+    // Show/hide Search Content
+    $("#generate-report").click(function() {
+        if ($('#search-content').hasClass('hide')) {
+            $("#search-content").removeClass('hide');
+        } else {
+            $("#search-content").addClass('hide');
+        }
+    });
+
+    // Close Flash Message Bar
     $('.close-flash-icon').click(function () {
         $('.alert-dismissible').toggle();
     });
@@ -26,17 +36,23 @@ $(document).ready(function () {
         $('#create-cash-up-btn').prop('disabled', false)
     });
 
+    // Disable Generate Report Button if No Checkbox is checked
+    $('#cb-spr-report, #cb-csv-report').on('click', function () {
+        let spCheckbox  = $('#cb-spr-report');
+        let csvCheckbox = $('#cb-csv-report');
+        let reportBtn   = $('#generate-report-btn');
+        if (!spCheckbox.is(':checked') && !csvCheckbox.is(':checked')) {
+            reportBtn.prop('disabled', true);
+        } else if (spCheckbox.is(':checked') || csvCheckbox.is(':checked')) {
+            reportBtn.prop('disabled', false);
+        } else {
+            reportBtn.prop('disabled', false);
+        }
+    });
+
     // Total Cash Calculations
     $('#total-cash, #total-card, #total-eft, #total-refund').on('keyup', function () {
         $('#create-cash-up-btn').prop('disabled', true);
-    });
-
-    $("#generate-report").click(function() {
-        if ($('#search-content').hasClass('hide')) {
-            $("#search-content").removeClass('hide');
-        } else {
-            $("#search-content").addClass('hide');
-        }
     });
 });
 
