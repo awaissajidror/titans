@@ -16,13 +16,14 @@ ActiveRecord::Schema.define(version: 2023_04_11_091358) do
   enable_extension "plpgsql"
 
   create_table "cash_ups", force: :cascade do |t|
-    t.text "note"
-    t.float "eft"
-    t.float "cash"
-    t.float "card"
-    t.float "total"
-    t.float "refund"
-    t.string "sub_total"
+    t.text "note", default: ""
+    t.string "sub_total", default: ""
+    t.float "eft", default: 0.0
+    t.float "cash", default: 0.0
+    t.float "card", default: 0.0
+    t.float "total", default: 0.0
+    t.float "refund", default: 0.0
+    t.date "cash_up_date", default: "2023-05-05"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
