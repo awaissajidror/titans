@@ -30,7 +30,7 @@ class CashUpsController < ApplicationController
         csv << ['Total Cash', 'Total Card', 'Total EFT', 'Total Refund', '', 'Total Sub', 'Total']
         csv << [total_cash, total_card, total_eft, total_refund, '', total_sub, total]
       end
-      
+
       send_data csv_data, filename: "#{Date.today.strftime('%B')}.csv", disposition: :attachment
     else
       total_cash_ups
@@ -100,7 +100,7 @@ class CashUpsController < ApplicationController
   end
 
   def cash_up_params
-    params.require(:cash_up).permit(:cash, :card, :eft, :sub_total, :total, :refund, :note)
+    params.require(:cash_up).permit(:cash, :card, :eft, :sub_total, :total, :refund, :note, :cash_up_date)
   end
 
   def cash_ups_of_month
