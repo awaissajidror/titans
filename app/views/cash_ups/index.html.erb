@@ -6,7 +6,6 @@
 
   <%= render partial: 'cash_ups/heading' %>
 
-
   <div class="d-flex justify-content-end">
     <% if params[:cash_up].present? && params[:cash_up][:month].present? %>
       <div class="my-auto">
@@ -55,7 +54,7 @@
           <%= cash_up.note.truncate_words(4) %>
         </a>
       </td>
-      <td><%= cash_up.created_at.strftime('%d-%b-%Y') %></td>
+      <td><%= cash_up.cash_up_date.strftime('%d-%b-%Y') %></td>
       <td>
         <%= link_to edit_cash_up_path(cash_up), class: 'no-text-deco' do %>
           <%= image_tag('/assets/edit.png', alt: 'Edit Icon', width: '20') %>
