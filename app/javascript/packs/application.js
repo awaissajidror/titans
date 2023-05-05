@@ -15,14 +15,13 @@ ActiveStorage.start()
 require("@popperjs/core")
 
 import "bootstrap"
+// The stylesheet location we created earlier
+import '../stylesheets/application.scss'
 import './app'
 import './custom'
 
 // Import the specific modules you may need (Modal, Alert, etc)
 import {Tooltip, Popover} from "bootstrap"
-
-// The stylesheet location we created earlier
-require("../stylesheets/application.scss")
 
 // If you're using Turbolinks. Otherwise simply use: jQuery(function () {
 document.addEventListener("turbolinks:load", () => {
