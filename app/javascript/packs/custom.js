@@ -36,17 +36,16 @@ $(document).ready(function () {
         $('#create-cash-up-btn').prop('disabled', false)
     });
 
-    // Disable Generate Report Button if No Checkbox is checked
-    $('#cb-spr-report, #cb-csv-report').on('click', function () {
-        let spCheckbox  = $('#cb-spr-report');
-        let csvCheckbox = $('#cb-csv-report');
-        let reportBtn   = $('#generate-report-btn');
-        if (!spCheckbox.is(':checked') && !csvCheckbox.is(':checked')) {
-            reportBtn.prop('disabled', true);
-        } else if (spCheckbox.is(':checked') || csvCheckbox.is(':checked')) {
-            reportBtn.prop('disabled', false);
-        } else {
-            reportBtn.prop('disabled', false);
+    // Toggle Checkboxes
+    $('#cb-spr-report').change(function() {
+        if ($(this).is(':checked')) {
+            $('#cb-csv-report').prop('checked', false);
+        }
+    });
+
+    $('#cb-csv-report').change(function() {
+        if ($(this).is(':checked')) {
+            $('#cb-spr-report').prop('checked', false);
         }
     });
 

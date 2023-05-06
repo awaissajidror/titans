@@ -6,6 +6,18 @@ class CashUpsController < ApplicationController
     @cash_ups = CashUps::FilterCashUpsService.call(params[:month], params[:page])
   end
 
+  def process_report
+    if params[:csv_report].present?
+      response = CashUps::CsvReportService.call(params[:cash_ups])
+
+      send_data response, filename: "#{Date.today.strftime('%B')}.csv", disposition: :attachment
+    else
+      response = CashUps::SpReportService.call(params[:cash_ups])
+
+      redirect_to sp_report_cash_ups_url(response)
+    end
+  end
+
   def show; end
 
   def new

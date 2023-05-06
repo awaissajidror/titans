@@ -7,9 +7,9 @@
   <%= render partial: 'cash_ups/heading' %>
 
   <div class="d-flex justify-content-end">
-    <% if params[:cash_ups].present? && params[:cash_ups][:month].present? %>
+    <% if params[:month].present? && @cash_ups.any? %>
       <div class="my-auto">
-        <%= image_tag '/assets/import.png', width: '30', id: 'import-cash-up-report',
+        <%= image_tag 'import.png', width: '30', id: 'import-cash-up-report',
                       data: { 'bs-toggle': 'modal', 'bs-target': '#reportModal' } %>
       </div>
     <% end %>

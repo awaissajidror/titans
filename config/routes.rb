@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     collection do
       get :sp_report
       get :generate_sp_pdf
+      post :process_report
     end
   end
 
