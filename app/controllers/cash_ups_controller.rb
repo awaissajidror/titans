@@ -1,52 +1,18 @@
 class CashUpsController < ApplicationController
   before_action :set_cash_up, only: %i[ show edit update destroy generate_pdf ]
-  # after_action :populate_fields, only: %i[ create update ]
   include ResponseAble
 
   def index
-    if params[:cash_up].present? && params[:cash_up][:month].present?
-      cash_ups_of_month
+    if params[:cash_ups].present? && params[:cash_ups][:month].present?
+      @cash_ups = cash_ups_of_month
     elsif params[:cash_ups].present? && params[:csv_report].present?
-      require 'csv'
-
-      cash_ups = params[:cash_ups]
-      parsed_response = JSON.parse(cash_ups)
-      total_eft = parsed_response.map { |hash| hash['eft'] }.reduce(:+)
-      total_cash = parsed_response.map { |hash| hash['cash'] }.reduce(:+)
-      total_card = parsed_response.map { |hash| hash['card'] }.reduce(:+)
-      total = parsed_response.map { |hash| hash['total'] }.reduce(:+)
-      total_refund = parsed_response.map { |hash| hash['refund'] }.reduce(:+)
-      total_sub = "#{total_cash + total_card + total_eft} - #{total_refund}"
-
-      csv_data = CSV.generate(headers: true) do |csv|
-        csv << %w[Cash Card EFT Refund Note Sub-Total Total]
-        parsed_response.each do |data|
-
-          keys_to_delete = %w[id created_at updated_at]
-          keys_to_delete.each { |key| data.delete(key) }
-          csv << [data['cash'], data['card'], data['eft'], data['refund'], data['note'], data['sub_total'], data['total']]
-        end
-        csv << ['', '', '', '', '', '', '']
-        csv << ['Total Cash', 'Total Card', 'Total EFT', 'Total Refund', '', 'Total Sub', 'Total']
-        csv << [total_cash, total_card, total_eft, total_refund, '', total_sub, total]
-      end
-
-      send_data csv_data, filename: "#{Date.today.strftime('%B')}.csv", disposition: :attachment
+      response = CashUps::CsvReportService.call(params[:cash_ups])
+      send_data response, filename: "#{Date.today.strftime('%B')}.csv", disposition: :attachment
     elsif params[:cash_ups].present? && params[:spr_report].present?
-      cash_ups = params[:cash_ups]
-      parsed_response = JSON.parse(cash_ups)
-      @total_eft = parsed_response.map { |hash| hash['eft'] }.reduce(:+)
-      @total_cash = parsed_response.map { |hash| hash['cash'] }.reduce(:+)
-      @total_card = parsed_response.map { |hash| hash['card'] }.reduce(:+)
-      @total = parsed_response.map { |hash| hash['total'] }.reduce(:+)
-      @total_refund = parsed_response.map { |hash| hash['refund'] }.reduce(:+)
-      @total_sub = "#{@total_cash + @total_card + @total_eft} - #{@total_refund}"
-      @month = Date.parse(parsed_response.last['cash_up_date']).strftime('%B')
-      redirect_to sp_report_cash_ups_url(total_eft: @total_eft, total_cash: @total_cash, total_card: @total_card,
-                                         total: @total, total_refund: @total_refund, total_sub: @total_sub,
-                                         month: @month)
+      response = CashUps::CsvReportService.call(params[:cash_ups])
+      redirect_to sp_report_cash_ups_url(response)
     else
-      total_cash_ups
+      @cash_ups = total_cash_ups
     end
   end
 
@@ -118,17 +84,14 @@ class CashUpsController < ApplicationController
   end
 
   def cash_ups_of_month
-    month_number = Date::MONTHNAMES.index(params[:cash_up][:month])
+    month_number = Date::MONTHNAMES.index(params[:cash_ups][:month])
     start_date = DateTime.new(Date.current.year, month_number, 1)
     end_date = start_date.end_of_month
 
-    @cash_ups = CashUp.between(start_date, end_date)
-                      .paginate(page: params[:page], per_page: 15)
-                      .order('id DESC')
+    CashUp.between(start_date, end_date).paginate(page: params[:page], per_page: 15).order('id DESC')
   end
 
   def total_cash_ups
-    @cash_ups = CashUp.paginate(page: params[:page], per_page: 15)
-                      .order('id DESC')
+    CashUp.paginate(page: params[:page], per_page: 15).order('id DESC')
   end
 end
