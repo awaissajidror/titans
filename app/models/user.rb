@@ -7,4 +7,6 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   enum roles: { super_admin: 1, admin: 2, employee: 3 }
+
+  scope :employees, -> { where("role = ?", 3) }
 end

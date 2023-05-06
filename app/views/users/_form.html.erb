@@ -1,25 +1,14 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_tag '/create/employee', method: :post do %>
   <div class="row">
     <div class="col-4">
       <div class="mb-3">
-        <%= form.label :name %>
-        <%= form.text_field :cash, class: 'form-control' %>
+        <%= label_tag :name %>
+        <%= text_field_tag 'user[name]', @user.name.present? ? @user.name : nil, class: 'form-control' %>
       </div>
 
       <div class="mb-3">
-        <%= form.label :phone_number %>
-        <%= form.text_field :phone_number, class: 'form-control' %>
+        <%= label_tag :phone_number %>
+        <%= text_field_tag 'user[phone_number]', @user.phone_number.present? ? @user.phone_number : nil, class: 'form-control' %>
       </div>
 
       <div class="d-flex justify-content-between">
@@ -28,7 +17,7 @@
         </div>
 
         <div>
-          <%= form.submit 'Create Employee', class: 'btn btn-primary' %>
+          <%= submit_tag 'Create Employee', class: 'btn btn-primary' %>
         </div>
       </div>
     </div>

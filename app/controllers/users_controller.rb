@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 15).order('id DESC')
+    @users = User.employees.paginate(page: params[:page], per_page: 15).order('id DESC')
   end
 
   def show
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
-      if @user.save
+      if @user.save(validate: false)
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else

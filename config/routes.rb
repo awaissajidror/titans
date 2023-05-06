@@ -18,4 +18,6 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, except: [:create, :update]
+  post '/create/employee', to: 'users#create'
 end
