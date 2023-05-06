@@ -15,6 +15,7 @@ gem 'devise'
 gem 'will_paginate', '~> 3.3'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'faker'
 
 # gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'

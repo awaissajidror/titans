@@ -1,9 +1,10 @@
-<%= form_tag '/create/employee', method: :post do %>
+<%= form_tag set_submit_route(params[:action]), method: set_submit_method(params[:action]) do %>
+  <%= hidden_field_tag 'id', @user.id %>
   <div class="row">
     <div class="col-4">
       <div class="mb-3">
         <%= label_tag :name %>
-        <%= text_field_tag 'user[name]', @user.name.present? ? @user.name : nil, class: 'form-control' %>
+        <%= text_field_tag 'user[name]', @user.name.present? ? @user.name : nil, class: 'form-control', required: true %>
       </div>
 
       <div class="mb-3">
@@ -17,7 +18,7 @@
         </div>
 
         <div>
-          <%= submit_tag 'Create Employee', class: 'btn btn-primary' %>
+          <%= submit_tag set_submit_btn_text(params[:action]), class: 'btn btn-primary' %>
         </div>
       </div>
     </div>

@@ -10,8 +10,8 @@ module ResponseAble
   end
 
   def success_response
-    flash[:success] = "CashUp #{set_success_text} Successfully!"
-    redirect_to cash_ups_url
+    flash[:success] = set_message
+    redirect_to set_url
   end
 
   def error_response
@@ -19,7 +19,29 @@ module ResponseAble
     render params[:action] == 'update' ? :edit : :new
   end
 
+  def set_message
+    case params[:controller]
+    when 'cash_ups'
+      "CashUp #{set_success_text} Successfully!"
+    when 'users'
+      "Employee #{set_success_text} Successfully!"
+    else
+      # code here
+    end
+  end
+
   def set_success_text
-    params[:action] == 'destroy' ? 'Deleted' : params[:action].humanize
+    params[:action] == 'destroy' ? 'Deleted' : "#{params[:action].humanize}d"
+  end
+
+  def set_url
+    case params[:controller]
+    when 'cash_ups'
+      cash_ups_url
+    when 'users'
+      users_url
+    else
+      # code here
+    end
   end
 end

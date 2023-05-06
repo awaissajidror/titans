@@ -18,18 +18,18 @@
       <td><%= user.phone_number %></td>
       <td>
         <%= link_to edit_user_path(user), class: 'no-text-deco' do %>
-          <%= image_tag('/assets/edit.png', alt: 'Edit Icon', width: '20') %>
+          <%= image_tag('edit.png', alt: 'Edit Icon', width: '20') %>
         <% end %>
 
         <span class="mx-3">|</span>
 
-        <%= image_tag('/assets/trash.png', alt: 'Trash Icon', width: '20', class: 'delete-cash-up cursor-pointer',
+        <%= image_tag('trash.png', alt: 'Trash Icon', width: '20', class: 'delete-cash-up cursor-pointer',
                       data: { 'bs-toggle': 'modal', 'bs-target': "#exampleModal-#{user.id}" }) %>
 
         <span class="mx-3">|</span>
 
         <%= link_to user_path(user.id) do %>
-          <%= image_tag('/assets/eye.png', width: '30') %>
+          <%= image_tag('eye.png', width: '30') %>
         <% end %>
       </td>
     </tr>

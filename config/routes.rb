@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   root 'homes#index'
 
   devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    passwords: 'users/passwords',
+    sessions:      'users/sessions',
+    passwords:     'users/passwords',
     registrations: 'users/registrations',
   }
 
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     member do
       get :generate_pdf
     end
+
     collection do
       get :sp_report
       get :generate_sp_pdf
@@ -20,4 +21,5 @@ Rails.application.routes.draw do
 
   resources :users, except: [:create, :update]
   post '/create/employee', to: 'users#create'
+  put '/update/employee',  to: 'users#update'
 end

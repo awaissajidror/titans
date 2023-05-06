@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  include ResponseAble
 
   def index
     @users = User.employees.paginate(page: params[:page], per_page: 15).order('id DESC')
@@ -16,29 +17,17 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    response = Users::CreateUserService.call(user_params)
+    return success_response if response
 
-    respond_to do |format|
-      if @user.save(validate: false)
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    error_response
   end
 
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    response = Users::UpdateUserService.call(@user, user_params)
+    return success_response if response
+
+    error_response
   end
 
   def destroy
