@@ -1,4 +1,5 @@
 class CashUp < ApplicationRecord
+  attribute :cash_up_date, :date, default: -> { Time.zone.now }
 
   # Custom Queries
   scope :this_year, -> { where("extract(year from created_at) = ?", Time.zone.now.year) }

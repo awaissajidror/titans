@@ -18,12 +18,12 @@ ActiveRecord::Schema.define(version: 2023_04_11_091358) do
   create_table "cash_ups", force: :cascade do |t|
     t.text "note", default: ""
     t.string "sub_total", default: ""
+    t.date "cash_up_date"
     t.float "eft", default: 0.0
     t.float "cash", default: 0.0
     t.float "card", default: 0.0
     t.float "total", default: 0.0
     t.float "refund", default: 0.0
-    t.date "cash_up_date", default: "2023-05-05"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
