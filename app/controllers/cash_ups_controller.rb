@@ -1,6 +1,7 @@
 class CashUpsController < ApplicationController
   before_action :set_cash_up, only: %i[ show edit update destroy generate_pdf ]
   # after_action :populate_fields, only: %i[ create update ]
+  include ResponseAble
 
   def index
     if params[:cash_up].present? && params[:cash_up][:month].present?
@@ -59,20 +60,24 @@ class CashUpsController < ApplicationController
   end
 
   def create
-    CashUps::CreateCashUpService.call(cash_up_params)
-    flash[:success] = 'CashUp Added Successfully!'
-    redirect_to cash_ups_url
+    response = CashUps::CreateCashUpService.call(cash_up_params)
+    return success_response if response
+
+    error_response
   end
 
   def update
-    @cash_up.update(cash_up_params)
-    flash[:success] = 'CashUp Updated Successfully!'
-    redirect_to cash_ups_url
+    response = CashUps::UpdateCashUpService.call(@cash_up, cash_up_params)
+    return success_response if response
+
+    error_response
   end
 
   def destroy
-    @cash_up.destroy
-    redirect_to cash_ups_url
+    response = CashUps::DestroyCashUpService.call(@cash_up)
+    return success_response if response
+
+    error_response
   end
 
   def generate_pdf
