@@ -31,12 +31,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
+    response = Users::DestroyUserService.call(@user)
+    return success_response if response
 
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    error_response
   end
 
   private

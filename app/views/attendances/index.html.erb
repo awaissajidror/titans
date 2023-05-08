@@ -1,0 +1,24 @@
+<h1>Attendance</h1>
+
+<table class="table table-sm table-striped">
+  <thead>
+  <tr>
+    <th>Employee Name</th>
+    <th>Employee Name</th>
+    <th colspan="3">Attendance Sheet</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td>
+        <%= link_to 'Sheet', attendance_path(user) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>

@@ -25,6 +25,12 @@
           <i class="align-middle" data-feather="user"></i> <span class="align-middle">Manage Employee</span>
         </a>
       </li>
+
+      <li class="sidebar-item <%= 'active' if current_page?(attendances_path) %>">
+        <a class="sidebar-link" href="<%= attendances_path %>">
+          <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Mark Attendance</span>
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
