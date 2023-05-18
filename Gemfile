@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.3'
+ruby '3.2.2'
 
 gem 'rails', '~> 6.1.7', '>= 6.1.7.3'
 gem 'pg', '~> 1.1'
@@ -23,6 +23,13 @@ gem 'faker'
 
 
 group :development, :test do
+  gem 'capistrano'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rbenv'
+  gem 'capistrano-passenger'
+
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
