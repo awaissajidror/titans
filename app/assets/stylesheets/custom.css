@@ -32,7 +32,8 @@
     font-weight: 500 !important;
     font-size: 1.75rem !important;
 }
-.ml-10px{
+
+.ml-10px {
     margin-left: 10px;
 }
 
@@ -46,6 +47,10 @@ a:hover {
 
 .clickable-row:hover {
     background: #1ab7ea;
+}
+
+.normal-font {
+    font-weight: normal !important;
 }
 
 .digg_pagination {

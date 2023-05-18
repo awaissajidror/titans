@@ -36,7 +36,7 @@ $(document).ready(function () {
         $('#create-cash-up-btn').prop('disabled', false)
     });
 
-    // Toggle Checkboxes
+    // Toggle Report Checkboxes
     $('#cb-spr-report').change(function() {
         if ($(this).is(':checked')) {
             $('#cb-csv-report').prop('checked', false);
@@ -47,6 +47,31 @@ $(document).ready(function () {
         if ($(this).is(':checked')) {
             $('#cb-spr-report').prop('checked', false);
         }
+    });
+
+    // Mark Attendance
+    $('.mark-attendance').on('change', function() {
+        const checkbox = $(this);
+        const day      = checkbox.attr('id').split('-')[0];
+        const status   = checkbox.attr('id').split('-')[1];
+        const userId   = checkbox.attr('id').split('-')[2];
+
+        $.ajax({
+            url: '/mark_attendance',
+            type: 'POST',
+            data: {
+                day: day,
+                status: status,
+                user_id: userId,
+                checked: checkbox.prop('checked')
+            },
+            success: function(response) {
+                console.log('Attendance updated successfully');
+            },
+            error: function(xhr, status, error) {
+                console.log('Error updating attendance:', error);
+            }
+        });
     });
 
     // Total Cash Calculations

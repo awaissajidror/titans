@@ -10,6 +10,8 @@ module Users
       user.password = Faker::Internet.password(min_length: 6)
 
       user.save
+
+
     end
 
     private
