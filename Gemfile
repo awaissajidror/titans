@@ -18,12 +18,6 @@ gem 'wkhtmltopdf-binary'
 gem 'faker'
 
 group :development, :test do
-  gem 'capistrano'
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-rbenv'
-  gem 'capistrano-passenger'
-
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
