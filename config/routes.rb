@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :attendances
   root 'homes#index'
 
   devise_for :users, controllers: {
@@ -23,4 +22,9 @@ Rails.application.routes.draw do
   resources :users, except: [:create, :update]
   post '/create/employee', to: 'users#create'
   put '/update/employee',  to: 'users#update'
+
+  get  '/attendances',      to: 'attendances#index'
+  post '/mark_attendance',  to: 'attendances#mark_attendance'
+
+
 end

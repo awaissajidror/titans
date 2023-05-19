@@ -16,10 +16,11 @@ ActiveRecord::Schema.define(version: 2023_05_08_163504) do
   enable_extension "plpgsql"
 
   create_table "attendances", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.boolean "is_absent"
-    t.boolean "is_present"
     t.string "employee_name"
+    t.date "attendance_date"
+    t.boolean "is_absent", default: false
+    t.boolean "is_present", default: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_attendances_on_user_id"

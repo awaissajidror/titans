@@ -36,7 +36,7 @@ $(document).ready(function () {
         $('#create-cash-up-btn').prop('disabled', false)
     });
 
-    // Toggle Checkboxes
+    // Toggle Report Checkboxes
     $('#cb-spr-report').change(function() {
         if ($(this).is(':checked')) {
             $('#cb-csv-report').prop('checked', false);
@@ -47,6 +47,35 @@ $(document).ready(function () {
         if ($(this).is(':checked')) {
             $('#cb-spr-report').prop('checked', false);
         }
+    });
+
+    // Mark Attendance
+    $('.mark-attendance').on('change', function() {
+        const checkbox = $(this);
+        const day      = checkbox.attr('id').split('-')[0];
+        const month    = checkbox.attr('id').split('-')[1];
+        const year     = checkbox.attr('id').split('-')[2];
+        const status   = checkbox.attr('id').split('-')[3];
+        const user_id  = checkbox.attr('id').split('-')[4];
+        const date = day + '-' + month + '-' + year;
+        debugger;
+
+        $.ajax({
+            url: '/mark_attendance',
+            type: 'POST',
+            data: {
+                attendance_date: date,
+                status:          status,
+                user_id:         user_id,
+                checked:         checkbox.prop('checked')
+            },
+            success: function(response) {
+                console.log('Attendance updated successfully');
+            },
+            error: function(xhr, status, error) {
+                console.log('Error updating attendance:', error);
+            }
+        });
     });
 
     // Total Cash Calculations
