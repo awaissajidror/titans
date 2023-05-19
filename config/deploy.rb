@@ -1,11 +1,13 @@
-lock '~> 3.17.2'
+# capistrano version
+lock '3.11.0'
 
-set :pty, true
-set :branch, :main
-set :keep_releases, 5
 set :application, 'titans'
-set :deploy_to, '/home/ubuntu/titans'
-set :ssh_options, verify_host_key: :never
 set :repo_url, 'https://github.com/awaissajidror/titans.git'
+set :branch, :main
+set :deploy_to, '/home/ubuntu/titans'
+set :pty, true
+
+# if rails 5.2 & above master.key is used instead of application.yml
 set :linked_files, %w{config/database.yml config/application.yml}
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'tmp/webpacker', 'public/system', 'vendor', 'storage', 'public/uploads'
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
+set :keep_releases, 3
