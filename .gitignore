@@ -35,7 +35,3 @@ yarn-debug.log*
 
 # Custom
 .idea/
-Capfile
-config/deploy.rb
-config/deploy/
-
