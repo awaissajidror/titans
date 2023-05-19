@@ -21,7 +21,7 @@ gem 'capistrano'
 gem 'capistrano3-puma'
 gem 'capistrano-rails', require: false
 gem 'capistrano-bundler', require: false
-gem 'capistrano-rvm'
+gem 'capistrano-rbenv'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
