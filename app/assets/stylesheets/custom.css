@@ -53,6 +53,14 @@ a:hover {
     font-weight: normal !important;
 }
 
+.font-12 {
+    font-size: 12px !important;
+}
+
+.font-w-500 {
+    font-weight: 500 !important;
+}
+
 .digg_pagination {
     cursor: default;
     float: right !important;

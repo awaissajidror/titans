@@ -1,11 +1,16 @@
-<h1>Attendance Sheet</h1>
+<h1>Attendance Sheet of this week</h1>
 
 <table class="table table-sm table-striped">
   <thead>
   <tr>
     <th>Employee Name</th>
-    <% DAYS_OF_WEEK.each do |day| %>
-      <th><%= day %></th>
+    <% @current_week.each do |day| %>
+      <th class="font-w-500">
+        <%= day.split(',').first %><br>
+        <span class="font-12">
+          <%= day.split(',').last %>
+        </span>
+      </th>
     <% end %>
   </tr>
   </thead>
@@ -14,15 +19,15 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= user.name %></td>
-      <% DAYS_OF_WEEK.each do |day| %>
+      <% @current_week.each do |day| %>
         <th>
           <div class="form-check form-check-inline">
-            <input class="form-check-input mark-attendance" type="checkbox" id="<%= day.downcase %>-present-<%= user.id %>" name="attendance[present]">
-            <label class="form-check-label normal-font" for="<%= day.downcase %>-present-<%= user.id %>">P</label>
+            <input class="form-check-input mark-attendance" type="checkbox" id="<%= day.split(',').last %>-present-<%= user.id %>" name="attendance[is_present]" checked="<%= 'checked' if check_present(user) %>">
+            <label class="form-check-label normal-font" for="<%= day.split(',').last %>-present-<%= user.id %>">P</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input mark-attendance" type="checkbox" id="<%= day.downcase %>-absent-<%= user.id %>" name="attendance[absent]">
-            <label class="form-check-label normal-font" for="<%= day.downcase %>-absent-<%= user.id %>">A</label>
+            <input class="form-check-input mark-attendance" type="checkbox" id="<%= day.split(',').last %>-absent-<%= user.id %>" name="attendance[is_absent]">
+            <label class="form-check-label normal-font" for="<%= day.split(',').last %>-absent-<%= user.id %>">A</label>
           </div>
         </th>
       <% end %>

@@ -53,17 +53,21 @@ $(document).ready(function () {
     $('.mark-attendance').on('change', function() {
         const checkbox = $(this);
         const day      = checkbox.attr('id').split('-')[0];
-        const status   = checkbox.attr('id').split('-')[1];
-        const userId   = checkbox.attr('id').split('-')[2];
+        const month    = checkbox.attr('id').split('-')[1];
+        const year     = checkbox.attr('id').split('-')[2];
+        const status   = checkbox.attr('id').split('-')[3];
+        const user_id  = checkbox.attr('id').split('-')[4];
+        const date = day + '-' + month + '-' + year;
+        debugger;
 
         $.ajax({
             url: '/mark_attendance',
             type: 'POST',
             data: {
-                day: day,
-                status: status,
-                user_id: userId,
-                checked: checkbox.prop('checked')
+                attendance_date: date,
+                status:          status,
+                user_id:         user_id,
+                checked:         checkbox.prop('checked')
             },
             success: function(response) {
                 console.log('Attendance updated successfully');
