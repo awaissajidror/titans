@@ -28,6 +28,7 @@ class CashUpsController < ApplicationController
   end
 
   def create
+    binding.pry
     response = CashUps::CreateCashUpService.call(cash_up_params)
     return success_response if response
 

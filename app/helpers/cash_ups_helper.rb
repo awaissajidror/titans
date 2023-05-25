@@ -9,6 +9,6 @@ module CashUpsHelper
   private
 
   def show_value(value)
-    params[:action].to_sym == :show ? value : 0.00
+    params[:action].to_sym == :show ? value : ''
   end
 end

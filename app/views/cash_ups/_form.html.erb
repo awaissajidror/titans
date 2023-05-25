@@ -12,49 +12,83 @@
       </div>
     <% end %>
 
+    <!-- CASH -->
     <div class="mb-3">
-      <%= form.label :cash, 'CASH' %>
-      <%= form.number_field :cash, step: :any, class: 'form-control', id: 'total-cash', value: set_value(form.object.cash) %>
+      <label for="total-cash">CASH</label>
+      <input type="text"
+             id="total-cash"
+             class="form-control"
+             name="cash_up[cash]"
+             placeholder="Enter Cash"
+             value="<%= set_value(form.object.cash) %>"
+             oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
     </div>
 
+    <!-- CARD -->
     <div class="mb-3">
-      <%= form.label :card, 'CARD' %>
-      <%= form.number_field :card, step: :any, class: 'form-control', id: 'total-card', value: set_value(form.object.card) %>
+      <label for="total-card">CARD</label>
+      <input type="text"
+             id="total-card"
+             class="form-control"
+             name="cash_up[card]"
+             placeholder="Enter Card"
+             value="<%= set_value(form.object.card) %>"
+             oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
     </div>
 
+    <!-- EFT -->
     <div class="mb-3">
-      <%= form.label :eft, 'EFT' %>
-      <%= form.number_field :eft, step: :any, class: 'form-control', id: 'total-eft', value: set_value(form.object.eft) %>
+      <label for="total-eft">EFT</label>
+      <input type="text"
+             id="total-eft"
+             class="form-control"
+             name="cash_up[eft]"
+             placeholder="Enter EFT"
+             value="<%= set_value(form.object.eft) %>"
+             oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
     </div>
 
+    <!-- REFUND -->
     <div class="mb-3">
-      <%= form.label :refund, 'REFUND' %>
-      <%= form.number_field :refund, step: :any, class: 'form-control', id: 'total-refund', value: set_value(form.object.refund) %>
+      <label for="total-refund">REFUND</label>
+      <input type="text"
+             id="total-refund"
+             class="form-control"
+             name="cash_up[refund]"
+             placeholder="Enter Refund"
+             value="<%= set_value(form.object.refund) %>"
+             oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
     </div>
 
+    <!-- DATE -->
     <div class="mb-3">
       <%= form.label :cash_up_date, 'DATE' %>
       <%= form.date_field :cash_up_date, class: 'form-control' %>
       <small>Today's date will be selected by default</small>
     </div>
 
+    <!-- SUB TOTAL -->
     <div class="mb-3">
       <%= form.label :sub_total, 'SUB TOTAL' %>
       <%= form.text_field :sub_total, class: 'form-control calculated-fields', disabled: true %>
     </div>
 
+    <!-- TOTAL -->
     <div class="mb-3">
       <%= form.label :total, 'TOTAL' %>
-      <%= form.number_field :total, class: 'form-control', disabled: true %>
+      <%= form.text_field :total, class: 'form-control', disabled: true %>
     </div>
 
+    <!-- NOTE -->
     <div class="mb-3">
       <%= form.label :note, 'NOTE' %>
       <%= form.text_area :note, rows: 5, class: 'form-control' %>
     </div>
 
+    <!-- Calculate -->
     <button type="button" class="btn btn-primary w-100 mb-3" id="show-calculations">Calculate</button>
 
+    <!-- Action Buttons -->
     <div class="d-flex justify-content-between">
       <div>
         <%= link_to 'Back', cash_ups_path, class: 'btn btn-secondary' %>

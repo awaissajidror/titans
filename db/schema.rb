@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_08_163504) do
+ActiveRecord::Schema.define(version: 2023_05_25_102825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,11 +30,11 @@ ActiveRecord::Schema.define(version: 2023_05_08_163504) do
     t.text "note", default: ""
     t.string "sub_total", default: ""
     t.date "cash_up_date"
-    t.float "eft", default: 0.0
-    t.float "cash", default: 0.0
-    t.float "card", default: 0.0
-    t.float "total", default: 0.0
-    t.float "refund", default: 0.0
+    t.string "eft", default: ""
+    t.string "cash", default: ""
+    t.string "card", default: ""
+    t.string "total", default: ""
+    t.string "refund", default: ""
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
