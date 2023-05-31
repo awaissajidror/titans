@@ -2,7 +2,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <%= form_tag process_report_cash_ups_path, method: :post do %>
-        <%= hidden_field_tag 'cash_ups', @cash_ups.to_json %>
+        <%= hidden_field_tag 'cash_ups', @total_cash_ups.to_json %>
         <div class="modal-header">
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>

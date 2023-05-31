@@ -6,11 +6,11 @@ module CashUps
 
     def call
       parsed_response = JSON.parse(cash_ups)
-      total_eft       = parsed_response.map { |hash| hash['eft'] }.reduce(:+)
-      total_cash      = parsed_response.map { |hash| hash['cash'] }.reduce(:+)
-      total_card      = parsed_response.map { |hash| hash['card'] }.reduce(:+)
-      total           = parsed_response.map { |hash| hash['total'] }.reduce(:+)
-      total_refund    = parsed_response.map { |hash| hash['refund'] }.reduce(:+)
+      total_eft       = parsed_response.map { |hash| hash['eft'].to_f }.sum
+      total_cash      = parsed_response.map { |hash| hash['cash'].to_f }.sum
+      total_card      = parsed_response.map { |hash| hash['card'].to_f }.sum
+      total           = parsed_response.map { |hash| hash['total'].to_f }.sum
+      total_refund    = parsed_response.map { |hash| hash['refund'].to_f }.sum
       total_sub       = "#{total_cash + total_card + total_eft} - #{total_refund}"
       month           = Date.parse(parsed_response.last['cash_up_date']).strftime('%B')
 

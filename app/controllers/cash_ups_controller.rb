@@ -3,7 +3,8 @@ class CashUpsController < ApplicationController
   include ResponseAble
 
   def index
-    @cash_ups = CashUps::FilterCashUpsService.call(params[:month], params[:page])
+    @total_cash_ups = CashUps::FilterCashUpsService.call(params[:month])
+    @cash_ups       = @total_cash_ups.paginate(page: params[:page], per_page: 15).order('id DESC')
   end
 
   def process_report
