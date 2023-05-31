@@ -22,11 +22,15 @@
       <% @current_week.each do |day| %>
         <th>
           <div class="form-check form-check-inline">
-            <input class="form-check-input mark-attendance" type="checkbox" id="<%= day.split(',').last %>-present-<%= user.id %>" name="attendance[is_present]" checked="<%= 'checked' if check_present(user) %>">
+            <input class="form-check-input mark-attendance" type="checkbox"
+                   id="<%= day.split(',').last %>-present-<%= user.id %>" name="attendance[is_present]"
+                   <%= 'checked' if present_marked(user, day.split(',').last) %>>
             <label class="form-check-label normal-font" for="<%= day.split(',').last %>-present-<%= user.id %>">P</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input mark-attendance" type="checkbox" id="<%= day.split(',').last %>-absent-<%= user.id %>" name="attendance[is_absent]">
+            <input class="form-check-input mark-attendance" type="checkbox"
+                   id="<%= day.split(',').last %>-absent-<%= user.id %>" name="attendance[is_absent]"
+                   <%= 'checked' if absent_marked(user, day.split(',').last) %>>
             <label class="form-check-label normal-font" for="<%= day.split(',').last %>-absent-<%= user.id %>">A</label>
           </div>
         </th>

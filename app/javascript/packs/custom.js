@@ -58,7 +58,6 @@ $(document).ready(function () {
         const status   = checkbox.attr('id').split('-')[3];
         const user_id  = checkbox.attr('id').split('-')[4];
         const date = day + '-' + month + '-' + year;
-        debugger;
 
         $.ajax({
             url: '/mark_attendance',
@@ -101,22 +100,22 @@ $(document).ready(function () {
     $(".sa-phone-input").on('focus', function () {
         const inputValue = $(this).val().replace(/\D/g, "").substring(0, 11);
 
-        if (inputValue === "") {
-            $(this).val("+27 ");
+        if (inputValue === '') {
+            $(this).val('+27 ');
         }
     }).on('input', function () {
-        const inputValue = $(this).val().replace(/\D/g, "").substring(0, 11);
-        const countryCode = "+27";
-        const areaCode = inputValue.substring(2, 4);
-        const middle = inputValue.substring(4, 7);
-        const last = inputValue.substring(7, 11);
+        const countryCode = '+27';
+        const inputValue         = $(this).val().replace(/\D/g, '').substring(0, 11);
+        const areaCode    = inputValue.substring(2, 4);
+        const middle      = inputValue.substring(4, 7);
+        const last        = inputValue.substring(7, 11);
 
         if (inputValue.length > 7) {
-            $(this).val(countryCode + " " + areaCode + " " + middle + " " + last);
+            $(this).val(countryCode + ' ' + areaCode + ' ' + middle + ' ' + last);
         } else if (inputValue.length > 4) {
-            $(this).val(countryCode + " " + areaCode + " " + middle);
+            $(this).val(countryCode + ' ' + areaCode + ' ' + middle);
         } else if (inputValue.length > 2) {
-            $(this).val(countryCode + " " + areaCode);
+            $(this).val(countryCode + ' ' + areaCode);
         } else if (inputValue.length > 0) {
             $(this).val(countryCode);
         }

@@ -1,11 +1,10 @@
 module AttendancesHelper
 
-  def check_present(user)
-    flag = nil
-    @current_week.each do |date|
-      flag = true if user.attendances.where(attendance_date: Date.parse(date.split(',').last))&.last&.is_present
-    end
+  def present_marked(user, day)
+    user.attendances.current_week.current_attendance(day)&.last&.is_present
+  end
 
-    flag
+  def absent_marked(user, day)
+    user.attendances.current_week.current_attendance(day)&.last&.is_absent
   end
 end

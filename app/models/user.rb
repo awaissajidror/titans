@@ -4,11 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # ActiveRecord::Relations
   has_many :attendances, dependent: :destroy
 
+  # ActiveRecord::Validations
   validates :email, presence: true, uniqueness: true
 
-  enum roles: { super_admin: 1, admin: 2, employee: 3 }
-
+  # Custom Queries
   scope :employees, -> { where("role = ?", 3) }
+
+  # Define Enums
+  enum roles: { super_admin: 1, admin: 2, employee: 3 }
 end
+
