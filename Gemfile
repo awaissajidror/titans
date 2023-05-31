@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.0'
+ruby '3.2.2'
 
 gem 'rails', '~> 6.1.7', '>= 6.1.7.3'
 gem 'pg', '~> 1.1'
@@ -16,11 +16,6 @@ gem 'will_paginate', '~> 3.3'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'faker'
-
-gem 'capistrano', '~> 3.11'
-gem 'capistrano-rails', '~> 1.4'
-gem 'capistrano-passenger', '~> 0.2.0'
-gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
