@@ -82,6 +82,45 @@ $(document).ready(function () {
     $('#total-cash, #total-card, #total-eft, #total-refund').on('keyup', function () {
         $('#create-cash-up-btn').prop('disabled', true);
     });
+
+    // Handle phone input
+    $(document).on('keypress keyup blur', '.sa-phone-input', function (event) {
+        // Allow only numeric characters, spaces, and a plus sign at the beginning
+        $(this).val($(this).val().replace(/[^+\d\s]+/g, ""));
+
+        if (
+            (event.which < 48 || event.which > 57) && // Numeric characters
+            event.which !== 32 && // Space
+            event.which !== 43 // Plus sign
+        ) {
+            event.preventDefault();
+        }
+    });
+
+    // South African phone formatting
+    $(".sa-phone-input").on('focus', function () {
+        const inputValue = $(this).val().replace(/\D/g, "").substring(0, 11);
+
+        if (inputValue === "") {
+            $(this).val("+27 ");
+        }
+    }).on('input', function () {
+        const inputValue = $(this).val().replace(/\D/g, "").substring(0, 11);
+        const countryCode = "+27";
+        const areaCode = inputValue.substring(2, 4);
+        const middle = inputValue.substring(4, 7);
+        const last = inputValue.substring(7, 11);
+
+        if (inputValue.length > 7) {
+            $(this).val(countryCode + " " + areaCode + " " + middle + " " + last);
+        } else if (inputValue.length > 4) {
+            $(this).val(countryCode + " " + areaCode + " " + middle);
+        } else if (inputValue.length > 2) {
+            $(this).val(countryCode + " " + areaCode);
+        } else if (inputValue.length > 0) {
+            $(this).val(countryCode);
+        }
+    });
 });
 
 // Chart JS

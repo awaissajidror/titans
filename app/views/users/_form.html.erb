@@ -8,8 +8,8 @@
       </div>
 
       <div class="mb-3">
-        <%= label_tag :phone_number %>
-        <%= text_field_tag 'user[phone_number]', @user.phone_number.present? ? @user.phone_number : nil, class: 'form-control' %>
+        <%= label_tag :phone_number, 'Phone Number' %>
+        <%= text_field_tag 'user[phone_number]', @user.phone_number.present? ? @user.phone_number : nil, class: 'form-control sa-phone-input' %>
       </div>
 
       <div class="d-flex justify-content-between">
