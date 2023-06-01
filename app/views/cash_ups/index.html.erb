@@ -94,7 +94,7 @@
   </tbody>
 </table>
 
-<%= render partial: 'partials/cash_up_report_modal' %>
+<%= render partial: 'partials/report_modal', locals: { name: 'cash_ups' } %>
 
 <div class="digg_pagination">
   <%= will_paginate @cash_ups, :container => false %>

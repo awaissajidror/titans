@@ -23,9 +23,7 @@ Rails.application.routes.draw do
   post '/create/employee', to: 'users#create'
   put '/update/employee',  to: 'users#update'
 
-  get  '/attendances',      to: 'attendances#index'
-  get  '/attendances/report',      to: 'attendances#generate_report'
-  post '/mark_attendance',  to: 'attendances#mark_attendance'
-
-
+  get  '/attendances',        to: 'attendances#index'
+  get  '/attendances/report', to: 'attendances#generate_report'
+  post '/mark_attendance',    to: 'attendances#mark_attendance'
 end

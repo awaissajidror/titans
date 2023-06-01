@@ -1,4 +1,4 @@
-<%= form_tag '/attendances/report', method: :get do %>
+<%= form_tag '/attendances', method: :get do %>
   <div class="row">
     <div class="col-4">
       <div class="form-group">
@@ -10,7 +10,7 @@
     <div class="col-4">
       <div class="form-group">
         <%= label_tag :generate_report, 'Select Week' %>
-        <%= select_tag('search[week]', options_for_select(WEEK_DROPDOWN), class: 'form-control') %>
+        <%= select_tag('search[week]', options_for_select(WEEK_DROPDOWN), prompt: 'Select Week', class: 'form-control') %>
       </div>
     </div>
   </div>

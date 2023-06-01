@@ -7,9 +7,9 @@
   <%= render partial: 'partials/heading', locals: { heading: 'Attendance Sheet of this week' } %>
 
   <div class="d-flex justify-content-end">
-    <% if params[:month].present? && @cash_ups.any? %>
+    <% if params[:search].present? && @attendances.any? %>
       <div class="my-auto">
-        <%= image_tag 'import.png', width: '30', id: 'import-cash-up-report',
+        <%= image_tag 'import.png', width: '30', id: 'import-attendance-report', class: 'mr-20px',
                       data: { 'bs-toggle': 'modal', 'bs-target': '#reportModal' } %>
       </div>
     <% end %>
@@ -24,7 +24,7 @@
   <thead>
   <tr>
     <th>Employee Name</th>
-    <% @current_week.each do |day| %>
+    <% @attendances.each do |day| %>
       <th class="font-w-500">
         <%= day.split(',').first %><br>
         <span class="font-12">
@@ -39,7 +39,7 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= user.name %></td>
-      <% @current_week.each do |day| %>
+      <% @attendances.each do |day| %>
         <th>
           <div class="form-check form-check-inline">
             <input class="form-check-input mark-attendance" type="checkbox"
@@ -59,5 +59,7 @@
   <% end %>
   </tbody>
 </table>
+
+<%= render partial: 'partials/report_modal', locals: { name: 'attendance' } %>
 
 <br>

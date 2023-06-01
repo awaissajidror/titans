@@ -61,6 +61,10 @@ a:hover {
     font-weight: 500 !important;
 }
 
+.mr-20px {
+    margin-right: 20px !important;
+}
+
 .digg_pagination {
     cursor: default;
     float: right !important;
