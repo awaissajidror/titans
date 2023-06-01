@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-between">
 
-  <%= render partial: 'cash_ups/heading' %>
+  <%= render partial: 'partials/heading', locals: { heading: 'Cash Ups' } %>
 
   <div class="d-flex justify-content-end">
     <% if params[:month].present? && @cash_ups.any? %>

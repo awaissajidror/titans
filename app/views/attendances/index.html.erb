@@ -1,4 +1,24 @@
-<h1>Attendance Sheet of this week</h1>
+<div id="search-content-attendance" class="hide">
+  <%= render partial: 'attendances/search_filters' %>
+</div>
+
+<div class="d-flex justify-content-between">
+
+  <%= render partial: 'partials/heading', locals: { heading: 'Attendance Sheet of this week' } %>
+
+  <div class="d-flex justify-content-end">
+    <% if params[:month].present? && @cash_ups.any? %>
+      <div class="my-auto">
+        <%= image_tag 'import.png', width: '30', id: 'import-cash-up-report',
+                      data: { 'bs-toggle': 'modal', 'bs-target': '#reportModal' } %>
+      </div>
+    <% end %>
+
+    <div class="my-auto">
+      <button type="button" class="btn btn-secondary" id="generate-report-attendance">Generate Report</button>
+    </div>
+  </div>
+</div>
 
 <table class="table table-sm table-striped">
   <thead>
