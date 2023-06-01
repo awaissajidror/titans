@@ -1,36 +1,37 @@
-<% if name == 'cash_ups' %>
-<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <%= form_tag process_report_cash_ups_path, method: :post do %>
-        <%= hidden_field_tag 'cash_ups', @total_cash_ups.to_json %>
-        <div class="modal-header">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="form-check form-check-inline">
-            <%= check_box_tag 'spr_report', nil, false, class: 'form-check-input', id: 'cb-spr-report', checked: true %>
-            <%= label_tag 'spr_report', 'SP Report', class: 'form-check-label' %>
-          </div>
-          <div class="form-check form-check-inline">
-            <%= check_box_tag 'csv_report', nil, false, class: 'form-check-input', id: 'cb-csv-report' %>
-            <%= label_tag 'csv_report', 'CSV Report', class: 'form-check-label' %>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <%= submit_tag 'Generate', class: 'btn btn-primary', id: 'generate-report-btn', data: { 'bs-dismiss': 'modal' } %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-<% else %>
+<% case name %>
+<% when 'cash_ups' %>
   <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <%= form_tag process_report_cash_ups_path, method: :post do %>
           <%= hidden_field_tag 'cash_ups', @total_cash_ups.to_json %>
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-check form-check-inline">
+              <%= check_box_tag 'spr_report', nil, false, class: 'form-check-input', id: 'cb-spr-report', checked: true %>
+              <%= label_tag 'spr_report', 'SP Report', class: 'form-check-label' %>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= check_box_tag 'csv_report', nil, false, class: 'form-check-input', id: 'cb-csv-report' %>
+              <%= label_tag 'csv_report', 'CSV Report', class: 'form-check-label' %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <%= submit_tag 'Generate', class: 'btn btn-primary', id: 'generate-report-btn', data: { 'bs-dismiss': 'modal' } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <%= form_tag attendances_process_report_path, method: :post do %>
+          <%= hidden_field_tag 'attendances', @data.to_json %>
           <div class="modal-header">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>

@@ -1,20 +1,21 @@
 class AttendancesController < ApplicationController
   before_action :set_user, only: :mark_attendance
   def index
-    @attendances = Attendances::CurrentWeekDaysService.call(params[:search])
+    response = Attendances::CurrentWeekDaysService.call(params[:search])
+    @attendances = response[:days]
+    @data        = response[:data]
     @users       = User.employees.paginate(page: params[:page], per_page: 15).order('id ASC')
   end
 
-  def generate_report
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: "Attendance-PDF-#{Date.today.strftime('%m-%d-%Y')}",
-               page_size: 'A4',
-               layout: 'pdf.html',
-               template: 'attendances/attendance_pdf',
-               encoding: 'UTF-8'
-      end
+  def process_report
+    if params[:csv_report].present?
+      response = Attendances::CsvReportService.call(params[:attendances])
+
+      send_data response, filename: "#{Date.today.strftime('%B')}.csv", disposition: :attachment
+    else
+      response = CashUps::SpReportService.call(params[:attendances])
+
+      redirect_to sp_report_cash_ups_url(response)
     end
   end
 
@@ -27,5 +28,4 @@ class AttendancesController < ApplicationController
   def set_user
     @user = User.find(params[:user_id])
   end
-
 end

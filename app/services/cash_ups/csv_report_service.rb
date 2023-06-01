@@ -31,8 +31,6 @@ module CashUps
 
     private
 
-    attr_reader
-
     attr_reader :cash_ups
   end
 end

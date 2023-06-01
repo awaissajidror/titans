@@ -85,5 +85,4 @@ class CashUpsController < ApplicationController
   def cash_up_params
     params.require(:cash_up).permit(:cash, :card, :eft, :sub_total, :total, :refund, :note, :cash_up_date)
   end
-
 end

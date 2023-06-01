@@ -9,14 +9,6 @@ $(document).ready(function () {
         }
     });
 
-    $("#generate-report-attendance").click(function() {
-        if ($('#search-content-attendance').hasClass('hide')) {
-            $("#search-content-attendance").removeClass('hide');
-        } else {
-            $("#search-content-attendance").addClass('hide');
-        }
-    });
-
     // Close Flash Message Bar
     $('.close-flash-icon').click(function () {
         $('.alert-dismissible').toggle();

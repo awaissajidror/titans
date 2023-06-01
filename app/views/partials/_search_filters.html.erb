@@ -1,0 +1,37 @@
+<div id="search-content" class="hide">
+  <% case name %>
+  <% when 'cash_ups' %>
+    <%= form_tag '/cash_ups', method: :get do %>
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <%= label_tag :generate_report, 'Generate Report' %>
+            <%= select_tag('month', options_for_select(MONTH_DROPDOWN, CURRENT_MONTH), class: 'form-control') %>
+          </div>
+        </div>
+      </div>
+
+      <%= submit_tag 'Search', class: 'my-3 btn btn-primary' %>
+    <% end %>
+  <% else %>
+    <%= form_tag '/attendances', method: :get do %>
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <%= label_tag :generate_report, 'Select Month' %>
+            <%= select_tag('search[month]', options_for_select(MONTH_DROPDOWN, CURRENT_MONTH), class: 'form-control') %>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="form-group">
+            <%= label_tag :generate_report, 'Select Week' %>
+            <%= select_tag('search[week]', options_for_select(WEEK_DROPDOWN), prompt: 'Select Week', class: 'form-control') %>
+          </div>
+        </div>
+      </div>
+
+      <%= submit_tag 'Search', class: 'my-3 btn btn-primary' %>
+    <% end %>
+  <% end %>
+</div>

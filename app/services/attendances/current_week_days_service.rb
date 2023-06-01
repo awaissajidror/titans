@@ -39,6 +39,8 @@ module Attendances
         end
 
         days
+
+        { data: attendances, days: days }
       else
         days          = Array.new
         today         = Date.today
@@ -50,7 +52,7 @@ module Attendances
           days << "#{date.strftime('%A,%d-%m-%Y')}"
         end
 
-        days
+        { data: nil, days: days }
       end
     end
 
