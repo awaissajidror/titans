@@ -2,7 +2,7 @@ class AttendancesController < ApplicationController
   before_action :set_user, only: :mark_attendance
   def index
     response = Attendances::CurrentWeekDaysService.call(params[:search])
-    @attendances = response[:days]
+    @attendances = response[:days].uniq
     @data        = response[:data]
     @users       = User.employees.paginate(page: params[:page], per_page: 15).order('id ASC')
   end
