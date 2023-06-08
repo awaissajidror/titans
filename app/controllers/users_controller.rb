@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   include ResponseAble
 
   def index
-    @users = User.employees.paginate(page: params[:page], per_page: 15).order('id DESC')
+    @users = User.employee_worker.paginate(page: params[:page], per_page: 15).order('id DESC')
   end
 
   def show
@@ -44,6 +44,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :phone_number)
+    params.require(:user).permit(:name, :phone_number, :role)
   end
 end
