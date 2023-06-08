@@ -6,7 +6,7 @@ class BaseService
   # Common Methods for user
   def set_user_role
     case params[:role]
-    when 'Employee'
+    when 'Labour'
       params[:role] = 3
     when 'Office worker'
       params[:role] = 4
