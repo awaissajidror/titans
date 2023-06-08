@@ -15,7 +15,7 @@ module Attendances
         end_date    = start_date.end_of_month
 
         if search[:week].present?
-          User.employees.each do |user|
+          User.labours.each do |user|
             start_date = Date.parse("#{week} #{month}").beginning_of_month + (week.to_i - 1) * 7
             end_date   = start_date + 6
 
@@ -24,7 +24,7 @@ module Attendances
             end
           end
         else
-          User.employees.each do |user|
+          User.office_workers.each do |user|
             user.attendances.where(attendance_date: start_date..end_date).each do |attendance|
               attendances << attendance
             end
