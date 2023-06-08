@@ -11,11 +11,11 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   # Custom Queries
-  scope :employees, -> { where('role = ?', 3) }
-  scope :office_worker, -> { where('role = ?', 4) }
-  scope :employee_worker, -> { where(role: [3, 4]) }
+  scope :labours, -> { where('role = ?', 3) }
+  scope :office_workers, -> { where('role = ?', 4) }
+  scope :labour_workers, -> { where(role: [3, 4]) }
 
   # Define Enums
-  enum roles: { super_admin: 1, admin: 2, employee: 3, office_worker: 4 }
+  enum roles: { super_admin: 1, admin: 2, labour: 3, office_worker: 4 }
 end
 
