@@ -49,6 +49,25 @@ $(document).ready(function () {
         }
     });
 
+    // Show Labour / Office Worker Dropdown
+    const roleDropdown = $('#search_role');
+
+    // When the role dropdown changes,
+    roleDropdown.on('change', function () {
+        const role = $(this).val();
+
+        if (role === 'Labour') {
+            $('.month-dropdown').removeClass('hide');
+            $('.week-dropdown').removeClass('hide');
+        } else if (role === 'Office worker') {
+            $('.month-dropdown').removeClass('hide');
+            $('.week-dropdown').addClass('hide');
+        } else {
+            $('.hide').hide();
+        }
+    });
+
+
     // Mark Attendance
     $('.mark-attendance').on('change', function() {
         const checkbox = $(this);
