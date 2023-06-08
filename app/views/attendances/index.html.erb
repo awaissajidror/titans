@@ -11,45 +11,47 @@
   </div>
 </div>
 
-<table class="table table-sm table-striped">
-  <thead>
-  <tr>
-    <th>Employee Name</th>
-    <% @attendances.each do |day| %>
-      <th class="font-w-500">
-        <%= day.split(',').first %><br>
-        <span class="font-12">
+<div class="overflow-auto">
+  <table class="table table-sm table-striped attendance">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <% @attendances.each do |day| %>
+        <th class="font-w-500">
+          <%= Date.parse(day.split(',').first).strftime('%a') %><br>
+          <span class="font-12">
           <%= day.split(',').last %>
         </span>
-      </th>
-    <% end %>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= user.name %></td>
-      <% @attendances.each do |day| %>
-        <th>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input mark-attendance" type="checkbox"
-                   id="<%= day.split(',').last %>-present-<%= user.id %>" name="attendance[is_present]"
-                   <%= 'checked' if present_marked(user, day.split(',').last) %>>
-            <label class="form-check-label normal-font" for="<%= day.split(',').last %>-present-<%= user.id %>">P</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input mark-attendance" type="checkbox"
-                   id="<%= day.split(',').last %>-absent-<%= user.id %>" name="attendance[is_absent]"
-                   <%= 'checked' if absent_marked(user, day.split(',').last) %>>
-            <label class="form-check-label normal-font" for="<%= day.split(',').last %>-absent-<%= user.id %>">A</label>
-          </div>
         </th>
       <% end %>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <% @attendances.each do |day| %>
+          <th>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input mark-attendance" type="checkbox"
+                     id="<%= day.split(',').last %>-present-<%= user.id %>" name="attendance[is_present]"
+                     <%= 'checked' if present_marked(user, day.split(',').last) %>>
+              <label class="form-check-label normal-font" for="<%= day.split(',').last %>-present-<%= user.id %>">P</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input mark-attendance" type="checkbox"
+                     id="<%= day.split(',').last %>-absent-<%= user.id %>" name="attendance[is_absent]"
+                     <%= 'checked' if absent_marked(user, day.split(',').last) %>>
+              <label class="form-check-label normal-font" for="<%= day.split(',').last %>-absent-<%= user.id %>">A</label>
+            </div>
+          </th>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= render partial: 'partials/report_modal', locals: { name: params[:controller] } %>
 

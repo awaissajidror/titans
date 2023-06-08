@@ -69,6 +69,10 @@ a:hover {
     margin-left: 20px !important;
 }
 
+.overflow-auto {
+    overflow: scroll;
+}
+
 .digg_pagination {
     cursor: default;
     float: right !important;
