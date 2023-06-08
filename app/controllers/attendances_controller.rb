@@ -4,7 +4,7 @@ class AttendancesController < ApplicationController
     response     = Attendances::CurrentWeekDaysService.call(params[:search])
     @attendances = response[:days].uniq
     @data        = response[:data]
-    @users       = User.employee_worker.paginate(page: params[:page], per_page: 15).order('id ASC')
+    @users       = list_users
   end
 
   def process_report
@@ -27,5 +27,15 @@ class AttendancesController < ApplicationController
 
   def set_user
     @user = User.find(params[:user_id])
+  end
+
+  def list_users
+    if params[:search].present? && params[:search][:role] == 'Labour'
+      User.labours.paginate(page: params[:page], per_page: 15).order('id ASC')
+    elsif params[:search].present? && params[:search][:role] == 'Office worker'
+      User.office_workers.paginate(page: params[:page], per_page: 15).order('id ASC')
+    else
+      User.labour_workers.paginate(page: params[:page], per_page: 15).order('id ASC')
+    end
   end
 end
