@@ -13,6 +13,7 @@ class User < ApplicationRecord
   # Custom Queries
   scope :employees, -> { where('role = ?', 3) }
   scope :office_worker, -> { where('role = ?', 4) }
+  scope :employee_worker, -> { where(role: [3, 4]) }
 
   # Define Enums
   enum roles: { super_admin: 1, admin: 2, employee: 3, office_worker: 4 }
