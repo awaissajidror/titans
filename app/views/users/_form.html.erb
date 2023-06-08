@@ -15,7 +15,7 @@
 
       <div class="mb-3">
         <%= label_tag :role, 'Role' %>
-        <%= select_tag('user[role]', options_for_select(labour_worker), prompt: 'Select Role', class: 'form-control', required: true) %>
+        <%= select_tag('user[role]', options_for_select(labour_worker, display_role(@user)), prompt: 'Select Role', class: 'form-control', required: true) %>
       </div>
 
       <div class="d-flex justify-content-between">
