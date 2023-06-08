@@ -20,4 +20,8 @@ module UsersHelper
   def labour_worker
     User.roles.reject { |role| role == 'super_admin' || role == 'admin' }.keys.map { |role| role.humanize }
   end
+
+  def display_role(user)
+    User.roles.key(user.role).to_s.humanize
+  end
 end
