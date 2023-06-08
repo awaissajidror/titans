@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   include ResponseAble
 
   def index
-    @users = User.employee_worker.paginate(page: params[:page], per_page: 15).order('id DESC')
+    @users = User.labour_workers.paginate(page: params[:page], per_page: 15).order('id DESC')
   end
 
   def show
