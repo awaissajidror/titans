@@ -6,6 +6,7 @@ module Users
     end
 
     def call
+      user.role = set_user_role
       user.update(params)
     end
 
