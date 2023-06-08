@@ -2,8 +2,8 @@ class AttendancesController < ApplicationController
   before_action :set_user, only: :mark_attendance
   def index
     response     = Attendances::CurrentWeekDaysService.call(params[:search])
-    @attendances = response[:days].uniq
-    @data        = response[:data]
+    @data        = response[:data]&.sort_by { |attendance| attendance.attendance_date }
+    @attendances = response[:days].uniq.sort_by { |date_string| Date.strptime(date_string.split(',')[1], '%d-%m-%Y') }
     @users       = list_users
   end
 
