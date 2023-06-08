@@ -15,7 +15,7 @@ module Attendances
           keys_to_delete.each { |key| data.delete(key) }
           csv << [
             data['employee_name'], Date.parse(data['attendance_date']).strftime('%d-%m-%Y'),
-            data['is_present'] ? 'Present' : '', data['is_absent'] ? 'Absent' : ''
+            data['is_present'] ? TICK_MARK : '', data['is_absent'] ? CROSS_MARK : ''
           ]
         end
         csv << ['', '', '', '', '', '', '']
