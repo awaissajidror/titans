@@ -16,14 +16,24 @@
   <% else %>
     <%= form_tag '/attendances', method: :get do %>
       <div class="row">
+        <!-- Role Dropdown -->
         <div class="col-4">
           <div class="form-group">
-            <%= label_tag :generate_report, 'Select Month' %>
-            <%= select_tag('search[month]', options_for_select(MONTH_DROPDOWN, CURRENT_MONTH), class: 'form-control') %>
+            <%= label_tag :role, 'Select Role' %>
+            <%= select_tag('search[role]', options_for_select(labour_worker), prompt: 'Select Role', class: 'form-control', id: 'search_role', required: true) %>
           </div>
         </div>
 
-        <div class="col-4">
+        <!-- Month Dropdown -->
+        <div class="col-4 hide month-dropdown">
+          <div class="form-group">
+            <%= label_tag :generate_report, 'Select Month' %>
+            <%= select_tag('search[month]', options_for_select(MONTH_DROPDOWN, CURRENT_MONTH), class: 'form-control', required: true) %>
+          </div>
+        </div>
+
+        <!-- Week Dropdown -->
+        <div class="col-4 hide week-dropdown">
           <div class="form-group">
             <%= label_tag :generate_report, 'Select Week' %>
             <%= select_tag('search[week]', options_for_select(WEEK_DROPDOWN), prompt: 'Select Week', class: 'form-control') %>
