@@ -6,7 +6,7 @@ module Attendances
 
     def call
       require 'csv'
-      parsed_response = JSON.parse(attendances)
+      parsed_response = JSON.parse(attendances).sort_by { |hash| [hash["user_id"], hash["attendance_date"]] }
 
       CSV.generate(headers: true) do |csv|
         csv << ['Employee Name', 'Date', 'Present', 'Absent']
